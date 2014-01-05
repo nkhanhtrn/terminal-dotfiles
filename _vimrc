@@ -21,4 +21,4 @@ set t_Co=256
 set number
 
 " Keyboard shortcut
-map <C-e>: NerdTreeToggle<CR>
+map <C-e> :NERDTreeToggle<CR>
