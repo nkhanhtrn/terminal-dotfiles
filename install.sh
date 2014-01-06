@@ -4,6 +4,9 @@ echo "Start install the configuration:"
 # Oh-My-Zsh
 sh oh-my-zsh/tools/install.sh
 
+# Terminal Solarized
+sh gnome-terminal-colors/dark.sh
+
 # Vim Solarized
 cp solarized/vim-colors-solarized/colors/ solarized.vim 
 
