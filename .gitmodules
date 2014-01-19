@@ -1,8 +1,8 @@
 [submodule "oh-my-zsh"]
 	path = oh-my-zsh
 	url = git://github.com/robbyrussell/oh-my-zsh.git
-[submodule "vim/bundle/vundle"]
-	path = vim/bundle/vundle
+[submodule "vim/vundle"]
+	path = vim/vundle
 	url = git://github.com/gmarik/vundle.git
 [submodule "gnome-terminal-colors"]
 	path = gnome-terminal-colors
