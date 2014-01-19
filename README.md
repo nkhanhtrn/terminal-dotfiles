@@ -1,9 +1,11 @@
 Here is the backup for my terminal dotfiles.
 
-The project includes configuration for vim and zsh.
+The project includes configuration for zsh, vim and git.
 
-To install, run: 
-./install.sh
+gitconfig contains git global information and should be changed if used by other but not the owner of this project.
 
-_gitconfig contains git global information and should be changed if used by other but not the owner of this project.
+To install:
+git clone --recursive git@github.com:nkhanhtran/terminal-dotfiles.git
+./terminal-dotfiles/install.sh
+
 
