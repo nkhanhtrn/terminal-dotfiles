@@ -2,7 +2,9 @@
 echo "Start install the configuration:"
 
 ############# Start installer #################
-#
+mkdir $HOME/.vim
+mkdir $HOME/.vim/bundle
+
 #### Oh-My-Zsh ####
 cp -r oh-my-zsh $HOME/.oh-my-zsh
 cp _zshrc $HOME/.zshrc
@@ -11,11 +13,10 @@ chsh -s /bin/zsh
 
 #### Solarized Colors ####
 sh gnome-terminal-colors/set_dark.sh
+cp -r vim/vim-color-solarized $HOME/.vim/bundle/
 #### End ####
 
 #### Vim ####
-mkdir $HOME/.vim
-mkdir $HOME/.vim/bundle
 cp -r vim/bundle/vundle $HOME/.vim/bundle/
 cp _vimrc $HOME/.vimrc	
 vim +BundleInstall +qall
