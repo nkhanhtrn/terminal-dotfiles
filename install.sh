@@ -29,7 +29,7 @@ cp _vimrc $HOME/.vimrc
 vim +BundleInstall +qall
 
 #### Powerline ####
-pip install vim/powerline
+pip install --user vim/powerline
 cp vim/powerline-fonts/*/*.ttf $HOME/.fonts/
 fc-cache -vf $HOME/.fonts/
 
