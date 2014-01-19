@@ -9,12 +9,12 @@ mkdir $HOME/.vim/bundle
 mkdir $HOME/.fonts
 
 #### Oh-My-Zsh ####
-cp -r oh-my-zsh $HOME/.oh-my-zsh
-cp _zshrc $HOME/.zshrc
 chsh -s /bin/zsh
+cp -r zsh/oh-my-zsh $HOME/.oh-my-zsh
+cp _zshrc $HOME/.zshrc
 
 #### Solarized Colors ####
-sh gnome-terminal-colors/set_dark.sh
+sh solarized/gnome-terminal-colors-solarized/set_dark.sh
 cp -r vim/vim-color-solarized $HOME/.vim/bundle/
 
 #### Vim ####
