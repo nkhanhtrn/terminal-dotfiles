@@ -2,13 +2,11 @@
 echo "Start install the configuration:"
 
 ############# Start installer #################
-#### Install required applications ####
-apt-get install -y vim git python-fontforge
-#### End ####
-
+#
 #### Oh-My-Zsh ####
-sh oh-my-zsh/tools/install.sh
-cp _zshrc $HOME/.zshrc	
+cp -r oh-my-zsh $HOME/.oh-my-zsh
+cp _zshrc $HOME/.zshrc
+chsh -s /bin/zsh
 #### End ####
 
 #### Solarized Colors ####
@@ -16,6 +14,8 @@ sh gnome-terminal-colors/set_dark.sh
 #### End ####
 
 #### Vim ####
+mkdir $HOME/.vim
+mkdir $HOME/.vim/bundle
 cp vim/bundle/vundle $HOME/.vim/bundle/
 cp _vimrc $HOME/.vimrc	
 vim +BundleInstall +qall
@@ -24,6 +24,7 @@ vim +BundleInstall +qall
 #### Powerline ####
 pip install --user powerline
 powerline/font/fontpatcher.py fonts/PowerlineSymbols.otf
+mkdir $HOME/.fonts
 mv "PowerlineSymbols for Powerline.otf" $HOME/.fonts/PowerlinerSymbols.otf
 fc-cache -vf $HOME/.fonts/
 #### End ####
