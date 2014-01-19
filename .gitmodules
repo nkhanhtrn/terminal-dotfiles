@@ -1,12 +1,9 @@
-[submodule "oh-my-zsh"]
-	path = oh-my-zsh
+[submodule "zsh/oh-my-zsh"]
+	path = zsh/oh-my-zsh
 	url = git://github.com/robbyrussell/oh-my-zsh.git
 [submodule "vim/vundle"]
 	path = vim/vundle
 	url = git://github.com/gmarik/vundle.git
-[submodule "solarized/gnome-terminal-colors"]
-	path = solarized/gnome-terminal-colors
-	url = git://github.com/sigurdga/gnome-terminal-colors-solarized.git
 [submodule "vim/powerline"]
 	path = vim/powerline
 	url = git://github.com/Lokaltog/powerline.git
