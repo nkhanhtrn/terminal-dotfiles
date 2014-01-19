@@ -4,9 +4,6 @@
 [submodule "vim/bundle/vundle"]
 	path = vim/bundle/vundle
 	url = git://github.com/gmarik/vundle.git
-[submodule "solarized"]
-	path = solarized
-	url = git://github.com/altercation/solarized.git
 [submodule "gnome-terminal-colors"]
 	path = gnome-terminal-colors
 	url = git://github.com/sigurdga/gnome-terminal-colors-solarized.git
