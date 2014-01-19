@@ -17,7 +17,7 @@ cp -r vim/vim-color-solarized $HOME/.vim/bundle/
 #### End ####
 
 #### Vim ####
-cp -r vim/bundle/vundle $HOME/.vim/bundle/
+cp -r vim/vundle $HOME/.vim/bundle/
 cp _vimrc $HOME/.vimrc	
 vim +BundleInstall +qall
 #### End ####
