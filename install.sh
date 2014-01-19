@@ -15,7 +15,7 @@ cp _zshrc $HOME/.zshrc
 
 #### Solarized Colors ####
 sh solarized/gnome-terminal-colors-solarized/set_dark.sh
-cp -r vim/vim-color-solarized $HOME/.vim/bundle/
+cp -r vim/vim-colors-solarized $HOME/.vim/bundle/
 
 #### Vim ####
 cp -r vim/vundle $HOME/.vim/bundle/
