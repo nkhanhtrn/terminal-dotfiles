@@ -10,3 +10,6 @@
 [submodule "gnome-terminal-colors"]
 	path = gnome-terminal-colors
 	url = https://github.com/sigurdga/gnome-terminal-colors-solarized.git
+[submodule "powerline"]
+	path = powerline
+	url = git@github.com:Lokaltog/powerline.git

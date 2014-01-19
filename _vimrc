@@ -1,3 +1,10 @@
+" Normal vim configuration
+set encoding=utf-8
+set number
+set t_Co=256
+set cursorline
+syntax enable
+
 " Add-on management using Vunble
 set rtp+=$HOME/.vim/bundle/vundle/
 call vundle#rc()
@@ -10,15 +17,11 @@ Bundle 'altercation/vim-colors-solarized'
 " Powerline Configuration
 set rtp+=$HOME/.local/lib/python2.7/site-packages/powerline/bindings/vim/
 set laststatus=2
+set guifont=PowerlineSymbols.otf
 
 " Colorizes Configuration
-syntax enable
 set background=dark
 colorscheme solarized
-
-" General Vim Configuration
-set t_Co=256
-set number
 
 " Keyboard shortcut
 map <C-e> :NERDTreeToggle<CR>
