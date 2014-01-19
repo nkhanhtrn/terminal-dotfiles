@@ -4,8 +4,8 @@
 [submodule "vim/vundle"]
 	path = vim/vundle
 	url = git://github.com/gmarik/vundle.git
-[submodule "gnome-terminal-colors"]
-	path = gnome-terminal-colors
+[submodule "solarized/gnome-terminal-colors"]
+	path = solarized/gnome-terminal-colors
 	url = git://github.com/sigurdga/gnome-terminal-colors-solarized.git
 [submodule "vim/powerline"]
 	path = vim/powerline
@@ -16,3 +16,6 @@
 [submodule "vim/vim-colors-solarized"]
 	path = vim/vim-colors-solarized
 	url = git://github.com/altercation/vim-colors-solarized.git
+[submodule "solarized/gnome-terminal-colors-solarized"]
+	path = solarized/gnome-terminal-colors-solarized
+	url = git://github.com/sigurdga/gnome-terminal-colors-solarized.git
