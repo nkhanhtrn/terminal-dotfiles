@@ -4,9 +4,15 @@ echo "Start install the configuration:"
 ############# Start installer #################
 
 #### Initialize ####
-mkdir $HOME/.vim
+if [ ! -d "$HOME/.vim" ]; then 
+    mkdir $HOME/.vim
+fi
+if [ ! -d "$HOME/.vim/bundle" ]; then 
 mkdir $HOME/.vim/bundle
+fi
+if [ ! -d "$HOME/.fonts" ]; then 
 mkdir $HOME/.fonts
+fi
 
 #### Oh-My-Zsh ####
 chsh -s /bin/zsh
@@ -23,7 +29,7 @@ cp _vimrc $HOME/.vimrc
 vim +BundleInstall +qall
 
 #### Powerline ####
-pip install --user vim/powerline
+pip install vim/powerline
 cp vim/powerline-fonts/*/*.ttf $HOME/.fonts/
 fc-cache -vf $HOME/.fonts/
 
