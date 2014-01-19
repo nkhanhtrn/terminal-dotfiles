@@ -17,7 +17,6 @@ Bundle 'altercation/vim-colors-solarized'
 " Powerline Configuration
 set rtp+=$HOME/.local/lib/python2.7/site-packages/powerline/bindings/vim/
 set laststatus=2
-set guifont=PowerlineSymbols.otf
 
 " Colorizes Configuration
 set background=dark

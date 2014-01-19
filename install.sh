@@ -23,9 +23,8 @@ vim +BundleInstall +qall
 
 #### Powerline ####
 pip install --user powerline
-powerline/font/fontpatcher.py fonts/PowerlineSymbols.otf
 mkdir $HOME/.fonts
-mv "PowerlineSymbols for Powerline.otf" $HOME/.fonts/PowerlinerSymbols.otf
+cp vim/powerline-fonts/*/*.ttf $HOME/.fonts/
 fc-cache -vf $HOME/.fonts/
 #### End ####
 
