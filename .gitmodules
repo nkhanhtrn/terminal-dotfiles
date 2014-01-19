@@ -7,8 +7,8 @@
 [submodule "gnome-terminal-colors"]
 	path = gnome-terminal-colors
 	url = git://github.com/sigurdga/gnome-terminal-colors-solarized.git
-[submodule "powerline"]
-	path = powerline
+[submodule "vim/powerline"]
+	path = vim/powerline
 	url = git://github.com/Lokaltog/powerline.git
 [submodule "vim/powerline-fonts"]
 	path = vim/powerline-fonts
