@@ -3,13 +3,13 @@
 	url = git://github.com/robbyrussell/oh-my-zsh.git
 [submodule "vim/bundle/vundle"]
 	path = vim/bundle/vundle
-	url = https://github.com/gmarik/vundle.git
+	url = git://github.com/gmarik/vundle.git
 [submodule "solarized"]
 	path = solarized
 	url = git://github.com/altercation/solarized.git
 [submodule "gnome-terminal-colors"]
 	path = gnome-terminal-colors
-	url = https://github.com/sigurdga/gnome-terminal-colors-solarized.git
+	url = git://github.com/sigurdga/gnome-terminal-colors-solarized.git
 [submodule "powerline"]
 	path = powerline
-	url = git@github.com:Lokaltog/powerline.git
+	url = git://github.com/Lokaltog/powerline.git
