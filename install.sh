@@ -16,7 +16,7 @@ sh gnome-terminal-colors/set_dark.sh
 #### Vim ####
 mkdir $HOME/.vim
 mkdir $HOME/.vim/bundle
-cp vim/bundle/vundle $HOME/.vim/bundle/
+cp -r vim/bundle/vundle $HOME/.vim/bundle/
 cp _vimrc $HOME/.vimrc	
 vim +BundleInstall +qall
 #### End ####
