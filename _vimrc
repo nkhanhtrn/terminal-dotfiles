@@ -16,13 +16,17 @@ Bundle 'tpope/vim-fugitive'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'Shutnik/jshint2.vim'
 
-" Powerline Configuration
+" Powerline configuration
 set rtp+=$HOME/.local/lib/python2.7/site-packages/powerline/bindings/vim/
 set laststatus=2
 
-" Colorizes Configuration
+" Colorizes configuration
 set background=dark
 colorscheme solarized
+
+" NERDTree configuration
+autocmd vimenter * if !argc() | NERDTree | endif
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
 " Keyboard shortcut
 map <C-e> :NERDTreeToggle<CR>
