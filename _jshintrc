@@ -1,1 +1,5 @@
-camelcase = true;
+{
+    "globals" : {
+        "camelcase": true
+    }
+}
