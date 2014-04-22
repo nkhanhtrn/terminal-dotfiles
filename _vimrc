@@ -14,6 +14,7 @@ Bundle 'scrooloose/nerdtree'
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'tpope/vim-fugitive'
 Bundle 'altercation/vim-colors-solarized'
+Bundle 'Shutnik/jshint2.vim'
 
 " Powerline Configuration
 set rtp+=$HOME/.local/lib/python2.7/site-packages/powerline/bindings/vim/
