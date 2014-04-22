@@ -8,3 +8,6 @@ vim +BundleInstall +qall
 
 # update Git configuration
 cp _gitconfig $HOME/.gitconfig
+
+# update JSHint configuration
+cp _jshintrc $HOME/.jshintrc
