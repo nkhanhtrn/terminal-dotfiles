@@ -16,6 +16,9 @@ fi
 if [ ! -d "$HOME/.solarized" ]; then
     mkdir $HOME/.solarized
 fi
+if [ ! -d "$HOME/.conkerorrc" ]; then
+    mkdir $HOME/.conkerorrc
+fi
 
 #### Oh-My-Zsh ####
 chsh -s /bin/zsh
@@ -42,3 +45,6 @@ cp _jshintrc $HOME/.jshintrc
 
 #### Git ####
 cp _gitconfig $HOME/.gitconfig
+
+#### Conkeror ###
+cp -r conkeror/* $HOME/.conkerorrc/
