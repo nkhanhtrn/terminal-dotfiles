@@ -6,7 +6,7 @@ gitconfig contains git global information and should be changed if used by other
 
 The following should be installed for a fresh computer:
 
-```sudo apt-get install zsh vim git python-pip nodejs npm```
+```sudo apt-get install zsh vim git python-pip nodejs npm fakeroot quilt debhelper```
 
 ```npm install jshint```
 
