@@ -48,3 +48,6 @@ cp _gitconfig $HOME/.gitconfig
 
 #### Conkeror ###
 cp -r conkeror/* $HOME/.conkerorrc/
+
+#### NPM Packages ###
+npm install -g bower jshint
