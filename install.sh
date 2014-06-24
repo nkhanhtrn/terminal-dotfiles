@@ -10,6 +10,9 @@ fi
 if [ ! -d "$HOME/.vim/bundle" ]; then 
     mkdir $HOME/.vim/bundle
 fi
+if [ ! -d "$HOME/.vim/colors" ]; then 
+    mkdir $HOME/.vim/colors
+fi
 if [ ! -d "$HOME/.fonts" ]; then 
     mkdir $HOME/.fonts
 fi
@@ -26,9 +29,7 @@ cp -r zsh/oh-my-zsh $HOME/.oh-my-zsh
 cp _zshrc $HOME/.zshrc
 
 #### Solarized Colors ####
-sh solarized/gnome-terminal-colors-solarized/set_dark.sh
-cp -r vim/vim-colors-solarized $HOME/.vim/bundle/
-cp solarized/gedit_solarized_dark.xml $HOME/.solarized/
+cp -r vim/vim-colors-solarized/colors/solarized.vim $HOME/.vim/colors/
 
 #### Vim ####
 cp -r vim/vundle $HOME/.vim/bundle/
@@ -50,4 +51,4 @@ cp _gitconfig $HOME/.gitconfig
 cp -r conkeror/* $HOME/.conkerorrc/
 
 #### NPM Packages ###
-npm install -g bower jshint
+# npm install -g bower jshint
