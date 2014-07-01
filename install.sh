@@ -38,8 +38,7 @@ pip install --user vim/powerline
 cp vim/powerline-fonts/*/*.ttf $HOME/.fonts/
 fc-cache -vf $HOME/.fonts/
 
-#### JSHint ###
-cp _jshintrc $HOME/.jshintrc
-
+#### Terminal Configuration ####
+cp _terminalrc $HOME/.config/xfce4/terminal/terminalrc
 #### Git ####
 cp _gitconfig $HOME/.gitconfig

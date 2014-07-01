@@ -9,5 +9,5 @@ vim +BundleInstall +qall
 # update Git configuration
 cp _gitconfig $HOME/.gitconfig
 
-# update JSHint configuration
-cp _jshintrc $HOME/.jshintrc
+# update Terminal configuration
+cp _terminalrc $HOME/.config/xfce4/terminal/terminalrc
