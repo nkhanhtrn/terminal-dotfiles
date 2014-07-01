@@ -11,6 +11,3 @@ cp _gitconfig $HOME/.gitconfig
 
 # update JSHint configuration
 cp _jshintrc $HOME/.jshintrc
-
-# update Conkeror configuration
-cp -r conkeror/* $HOME/.conkerorrc/
