@@ -1,16 +1,12 @@
 Here is the backup for my terminal dotfiles.
 
-The backup includes configuration for zsh, vim, git and jshint.
+The backup includes configurations for most used terminal programs on my lappy.
 
-gitconfig contains git global information and should be changed if used by other but not the owner of this project.
+gitconfig contains git global information and should be changed if used by other but not me.
 
-The following should be installed for a fresh computer:
+The following should be installed in order to make this backup works: 
 
-```sudo apt-get install zsh vim git python-pip nodejs npm fakeroot quilt debhelper```
-
-```npm install jshint```
-
-```chsh -s /bin/zsh```
+```sudo apt-get install zsh vim git python-pip```
 
 To install:
 
