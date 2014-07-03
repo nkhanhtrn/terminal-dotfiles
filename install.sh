@@ -20,6 +20,10 @@ if [ ! -d "$HOME/.solarized" ]; then
     mkdir $HOME/.solarized
 fi
 
+if [ ! -d "$HOME/.config/xfce4/terminal" ]; then
+    mkdir $HOME/.config/xfce4/terminal
+fi
+
 #### Oh-My-Zsh ####
 chsh -s /bin/zsh
 cp -r zsh/oh-my-zsh $HOME/.oh-my-zsh
@@ -40,5 +44,6 @@ fc-cache -vf $HOME/.fonts/
 
 #### Terminal Configuration ####
 cp _terminalrc $HOME/.config/xfce4/terminal/terminalrc
+
 #### Git ####
 cp _gitconfig $HOME/.gitconfig
