@@ -26,4 +26,5 @@ DropdownWidth=67
 DropdownHeight=72
 DropdownOpacity=90
 DropdownPosition=100
+DropdownKeepOpenDefault=TRUE
 
