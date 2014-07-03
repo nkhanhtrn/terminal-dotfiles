@@ -22,4 +22,8 @@ MiscTabCloseMiddleClick=TRUE
 MiscTabPosition=GTK_POS_TOP
 MiscHighlightUrls=TRUE
 MiscScrollAlternateScreen=TRUE
+DropdownWidth=67
+DropdownHeight=72
+DropdownOpacity=90
+DropdownPosition=100
 
