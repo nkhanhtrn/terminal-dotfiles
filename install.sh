@@ -26,14 +26,14 @@ fi
 
 #### Oh-My-Zsh ####
 chsh -s /bin/zsh
-cp -r zsh/oh-my-zsh $HOME/.oh-my-zsh
+cp -ra zsh/oh-my-zsh $HOME/.oh-my-zsh
 cp _zshrc $HOME/.zshrc
 
 #### Solarized Colors ####
 cp -r vim/vim-colors-solarized/colors/solarized.vim $HOME/.vim/colors/
 
 #### Vim ####
-cp -r vim/vundle $HOME/.vim/bundle/
+cp -ra vim/vundle $HOME/.vim/bundle/
 cp _vimrc $HOME/.vimrc	
 vim +BundleInstall +qall
 
