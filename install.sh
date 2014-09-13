@@ -40,11 +40,18 @@ vim +BundleInstall +qall
 echo "=========================\n"
 
 #### Powerline ####
-echo "======= Powerline setup ======="
+echo "======= Powerline Setup ======="
 pip install --user git+git://github.com/Lokaltog/powerline
 cp vim/powerline-fonts/*/*.ttf $HOME/.fonts/
 fc-cache -vf $HOME/.fonts/
 echo "===============================\n"
+
+#### Nvm ####
+echo "======= NVM Setup ======="
+git clone https://github.com/creationix/nvm.git ~/.nvm
+echo "===============================\n"
+
+echo "=========================\n"
 
 #### Terminal Configuration ####
 echo "======= XFCE4 Terminal setup ======="
