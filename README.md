@@ -16,4 +16,5 @@ To install:
 
 ```sh install.sh```
 
-
+To update:
+```sh update.sh```
