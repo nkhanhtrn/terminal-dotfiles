@@ -6,9 +6,9 @@ set cursorline
 syntax enable
 
 " Add-on management using Vunble
-set rtp+=$HOME/.vim/bundle/vundle/
+set rtp+=$HOME/.vim/bundle/Vundle.vim
 call vundle#rc()
-Bundle 'gmarik/vundle'
+Bundle 'gmarik/Vundle.vim'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'scrooloose/nerdtree'
 Bundle 'Lokaltog/vim-easymotion'

@@ -1,5 +1,5 @@
 #!/bin/zsh
-echo "Start install the configuration:"
+echo "Start install the configuration"
 
 ############# Start installer #################
 
@@ -25,25 +25,33 @@ if [ ! -d "$HOME/.config/xfce4/terminal" ]; then
 fi
 
 #### Oh-My-Zsh ####
+echo "======= ZSH Setup ======="
 chsh -s /bin/zsh
-cp -ra zsh/oh-my-zsh $HOME/.oh-my-zsh
-cp _zshrc $HOME/.zshrc
-
-#### Solarized Colors ####
-cp -r vim/vim-colors-solarized/colors/solarized.vim $HOME/.vim/colors/
+git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
+cp zsh/_config $HOME/.zshrc
+echo "=========================\n"
 
 #### Vim ####
-cp -ra vim/vundle $HOME/.vim/bundle/
-cp _vimrc $HOME/.vimrc	
+echo "======= Vim Setup ======="
+git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+cp -r vim/vim-colors-solarized/colors/solarized.vim $HOME/.vim/colors/
+cp vim/_config $HOME/.vimrc	
 vim +BundleInstall +qall
+echo "=========================\n"
 
 #### Powerline ####
-pip install --user vim/powerline
+echo "======= Powerline setup ======="
+pip install --user git+git://github.com/Lokaltog/powerline
 cp vim/powerline-fonts/*/*.ttf $HOME/.fonts/
 fc-cache -vf $HOME/.fonts/
+echo "===============================\n"
 
 #### Terminal Configuration ####
-cp _terminalrc $HOME/.config/xfce4/terminal/terminalrc
+echo "======= XFCE4 Terminal setup ======="
+cp terminal/_config $HOME/.config/xfce4/terminal/terminalrc
+echo "==============================\n"
 
 #### Git ####
-cp _gitconfig $HOME/.gitconfig
+echo "======= Git setup ======="
+cp git/_config $HOME/.gitconfig
+echo "=========================\n"

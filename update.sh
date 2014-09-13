@@ -1,13 +1,13 @@
 
 # update ZSH configuration
-cp _zshrc $HOME/.zshrc
+cp zsh/_config $HOME/.zshrc
 
 # update VIM configuration
-cp _vimrc $HOME/.vimrc	
+cp vim/_config $HOME/.vimrc	
 vim +BundleInstall +qall
 
 # update Git configuration
-cp _gitconfig $HOME/.gitconfig
+cp git/_config $HOME/.gitconfig
 
 # update Terminal configuration
-cp _terminalrc $HOME/.config/xfce4/terminal/terminalrc
+cp terminal/_config $HOME/.config/xfce4/terminal/terminalrc
