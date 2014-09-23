@@ -27,6 +27,11 @@ fi
 if [ ! -d "$HOME/.emacs.d" ]; then
     mkdir $HOME/.emacs.d
 fi
+
+if [ "$HOME/.emacs" ]; then
+    rm $HOME/.emacs
+fi
+
 #### Oh-My-Zsh ####
 echo "======= ZSH Setup ======="
 chsh -s /bin/zsh
