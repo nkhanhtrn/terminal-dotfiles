@@ -2,6 +2,9 @@
 # update ZSH configuration
 cp zsh/_config $HOME/.zshrc
 
+# update EMACS configuration
+cp -r emacs/* $HOME/.emacs.d
+
 # update VIM configuration
 cp vim/_config $HOME/.vimrc	
 vim +BundleInstall +qall
