@@ -24,12 +24,20 @@ if [ ! -d "$HOME/.config/xfce4/terminal" ]; then
     mkdir $HOME/.config/xfce4/terminal
 fi
 
+if [ ! -d "$HOME/.emacs.d" ]; then
+    mkdir $HOME/.emacs.d
+fi
 #### Oh-My-Zsh ####
 echo "======= ZSH Setup ======="
 chsh -s /bin/zsh
 git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
 cp zsh/_config $HOME/.zshrc
 echo "=========================\n"
+
+#### Emacs ####
+echo "======= Emacs Setup ======"
+cp -r emacs/* $HOME/.emacs.d/
+echo "=========================="
 
 #### Vim ####
 echo "======= Vim Setup ======="
