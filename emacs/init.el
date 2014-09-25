@@ -7,6 +7,8 @@
           `((".*" . ,temporary-file-directory)))
     (setq auto-save-file-name-transforms
           `((".*" ,temporary-file-directory t)))
+(tool-bar-mode 0)
+(menu-bar-mode 0)
 
 
 ; ================================================================
@@ -27,7 +29,10 @@
 (defvar nkhanhtran/elpa-packages
     ; evil-mode
   '(evil
-    ;; Color theme
+    ; powerline
+    powerline
+    powerline-evil
+    ; Color theme
     color-theme
     color-theme-solarized))
 (dolist (p nkhanhtran/elpa-packages)
@@ -45,3 +50,9 @@
 ; evil-mode
 (require 'evil)
 (evil-mode 1)
+
+
+; ================================================================
+; powerline
+(require 'powerline)
+(powerline-default-theme)
