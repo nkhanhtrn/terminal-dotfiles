@@ -27,14 +27,26 @@
 (when (not package-archive-contents)
   (package-refresh-contents))
 (defvar nkhanhtran/elpa-packages
+  '(
     ; evil-mode
-  '(evil
+    evil
+    evil-tabs
     ; powerline
     powerline
     powerline-evil
     ; Color theme
     color-theme
-    color-theme-solarized))
+    color-theme-solarized
+    ; IDE plugins
+    flycheck
+    ; Dired
+    dired-details
+    dired-details+
+    dired+
+    dired-rainbow
+    ; misc plugins
+    nyan-mode
+  ))
 (dolist (p nkhanhtran/elpa-packages)
   (when (not (package-installed-p p))
     (package-install p)))
@@ -50,9 +62,17 @@
 ; evil-mode
 (require 'evil)
 (evil-mode 1)
+(global-evil-tabs-mode t)
 
 
 ; ================================================================
 ; powerline
 (require 'powerline)
-(powerline-default-theme)
+(require 'powerline-evil)
+(powerline-evil-vim-color-theme)
+(display-time-mode t)
+
+
+; ================================================================
+; misc plugins config
+(require 'nyan-mode)
