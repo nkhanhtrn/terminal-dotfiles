@@ -9,6 +9,7 @@
           `((".*" ,temporary-file-directory t)))
 (tool-bar-mode 0)
 (menu-bar-mode 0)
+(setq-default indent-tabs-mode nil)
 (custom-set-variables
  '(initial-frame-alist (quote ((fullscreen . maximized))))) ;; start maximized
 (show-paren-mode t)
@@ -40,14 +41,15 @@
     evil
     evil-tabs
     ; Color theme
-    color-theme
-    color-theme-solarized
+    ;color-theme
+    ;color-theme-solarized
     ; IDE plugins
     flycheck
     ; Lisp Mode
     elisp-slime-nav
     ; Web Mode
     web-mode
+    emmet-mode
     ; Dired dired-details
     dired-details+
     dired+
@@ -63,14 +65,9 @@
 
 ; ================================================================
 ; Set theme for emacs
-;(load-theme 'solarized-light t)
-(load-theme 'solarized-dark t)
-(setq evil-emacs-state-cursor '("red" box))
-(setq evil-normal-state-cursor '("green" box))
-(setq evil-visual-state-cursor '("orange" box))
-(setq evil-insert-state-cursor '("red" bar))
-(setq evil-replace-state-cursor '("red" bar))
-(setq evil-operator-state-cursor '("red" hollow))
+(setq custom-theme-directory "~/.emacs.d/lib/themes/")
+(add-to-list 'custom-theme-load-path custom-theme-directory)
+(load-theme 'nk t)
 
 
 ; ================================================================
@@ -78,6 +75,9 @@
 (require 'evil)
 (evil-mode 1)
 (global-evil-tabs-mode t)
+;(setq evil-emacs-state-cursor '("white" bar))
+;(setq evil-visual-state-cursor '("YellowGreen" box))
+;(setq evil-insert-state-cursor '("white" bar))
 
 
 ; ================================================================
@@ -125,10 +125,19 @@
 
 ; ================================================================
 ; Web Mode
-(defun nk-setup-web ()
+(defun web-mode-hook ()
+  (rainbow-mode 0)
+  (whitespace-mode 0)
+  (font-lock-mode 1)
+  (idle-highlight-mode 0)
+)
+
+(add-hook 'web-mode-hook 'web-mode-hook)
+
+(defun nk-web-mode ()
   ; enable web-mode
   (web-mode)
-
+  
   ; localize some variables
   (make-local-variable 'web-mode-code-indent-offset)
   (make-local-variable 'web-mode-markup-indent-offset)
@@ -147,4 +156,7 @@
                 ac-source-words-in-same-mode-buffers
                 ac-source-dictionary)))))
 
-(add-to-list 'auto-mode-alist '("\\.php$" . nk-setup-web))
+(add-to-list 'auto-mode-alist '("\\.html\\'" . nk-web-mode))
+(add-to-list 'auto-mode-alist '("\\.php\\'" . nk-web-mode))
+(add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . nk-web-mode))
+(add-to-list 'auto-mode-alist '("\\.erb\\'" . nk-web-mode))

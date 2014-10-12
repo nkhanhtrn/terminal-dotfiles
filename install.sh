@@ -24,12 +24,12 @@ if [ ! -d "$HOME/.config/xfce4/terminal" ]; then
     mkdir $HOME/.config/xfce4/terminal
 fi
 
-if [ ! -d "$HOME/.emacs.d" ]; then
-    mkdir $HOME/.emacs.d
-fi
-
+# emacs folder preparation
 if [ "$HOME/.emacs" ]; then
     rm $HOME/.emacs
+fi
+if [ ! -d "$HOME/.emacs.d" ]; then
+    mkdir $HOME/.emacs.d
 fi
 
 #### Oh-My-Zsh ####
