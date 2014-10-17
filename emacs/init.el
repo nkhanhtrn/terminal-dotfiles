@@ -45,11 +45,11 @@
     ;color-theme-solarized
     ; IDE plugins
     flycheck
+    auto-complete
     ; Lisp Mode
     elisp-slime-nav
     ; Web Mode
     web-mode
-    emmet-mode
     ; Dired dired-details
     dired-details+
     dired+
@@ -115,48 +115,52 @@
 (define-key evil-normal-state-map (kbd "C-j") 'evil-window-down)
 (define-key evil-normal-state-map (kbd "C-k") 'evil-window-up)
 (define-key evil-normal-state-map (kbd "C-l") 'evil-window-right)
-(define-key evil-normal-state-map (kbd "M-k") (lambda ()
-                    (interactive)
-                    (evil-scroll-up nil)))
-(define-key evil-normal-state-map (kbd "M-j") (lambda ()
-                        (interactive)
-                        (evil-scroll-down nil)))
+;(define-key evil-normal-state-map (kbd "M-k") (lambda ()
+;                    (interactive)
+;                    (evil-scroll-up nil)))
+;(define-key evil-normal-state-map (kbd "M-j") (lambda ()
+;                        (interactive)
+;                        (evil-scroll-down nil)))
 
 
 ; ================================================================
 ; Web Mode
+(require 'web-mode)
+(web-mode)
+(add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.tpl\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.php\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.[gj]sp\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.xml?\\'" . web-mode))
+
 (defun web-mode-hook ()
-  (rainbow-mode 0)
-  (whitespace-mode 0)
-  (font-lock-mode 1)
-  (idle-highlight-mode 0)
+  ; indendation
+  (setq web-mode-markup-indent-offset 2)
+  (setq web-mode-css-indent-offset 2)
+  (setq web-mode-code-indent-offset 4)
+
+  ; shortcuts
+  (define-key web-mode-map (kbd "M-f") 'web-mode-fold-or-unfold)
+  (define-key web-mode-map (kbd "M-j") 'web-mode-element-next)
+  (define-key web-mode-map (kbd "M-k") 'web-mode-element-previous)
+  (define-key web-mode-map (kbd "M-l") 'web-mode-element-child)
+  (define-key web-mode-map (kbd "M-h") 'web-mode-element-parent)
+  (define-key web-mode-map (kbd "M-;") 'web-mode-navigate)
+  (define-key web-mode-map (kbd "M-n") 'web-mode-comment-or-uncomment)
+  (define-key web-mode-map (kbd "M-v") 'web-mode-mark-and-expand)
+  (define-key web-mode-map (kbd "M-r") 'web-mode-reload)
+  (define-key web-mode-map (kbd "M-w") 'web-mode-whitespaces-show)
+
+  ; auto completion
+  (setq web-mode-ac-sources-alist
+  '(("css" . (ac-source-css-property))
+    ("html" . (ac-source-words-in-buffer ac-source-abbrev)))
+  )
 )
 
 (add-hook 'web-mode-hook 'web-mode-hook)
-
-(defun nk-web-mode ()
-  ; enable web-mode
-  (web-mode)
-  
-  ; localize some variables
-  (make-local-variable 'web-mode-code-indent-offset)
-  (make-local-variable 'web-mode-markup-indent-offset)
-  (make-local-variable 'web-mode-css-indent-offset)
-
-  ; set indentation, can set different indentation level for different code type
-  (setq web-mode-code-indent-offset 4)
-  (setq web-mode-css-indent-offset 2)
-  (setq web-mode-markup-indent-offset 2)
-
-  ; enable auto-completion for web-mode
-  (setq web-mode-ac-sources-alist
-    '(("css" . (ac-source-words-in-buffer ac-source-css-property))
-      ("html" . (ac-source-words-in-buffer ac-source-abbrev))
-      ("php" . (ac-source-words-in-buffer
-                ac-source-words-in-same-mode-buffers
-                ac-source-dictionary)))))
-
-(add-to-list 'auto-mode-alist '("\\.html\\'" . nk-web-mode))
-(add-to-list 'auto-mode-alist '("\\.php\\'" . nk-web-mode))
-(add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . nk-web-mode))
-(add-to-list 'auto-mode-alist '("\\.erb\\'" . nk-web-mode))
