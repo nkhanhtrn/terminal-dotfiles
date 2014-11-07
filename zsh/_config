@@ -21,3 +21,6 @@ source $ZSH/oh-my-zsh.sh
 # nvm
 source $HOME/.nvm/nvm.sh
 nvm use 0.11 1>/dev/null
+
+# Haskell Path
+PATH=$PATH:~/.cabal/bin
