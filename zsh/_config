@@ -24,3 +24,6 @@ nvm use 0.11 1>/dev/null
 
 # Haskell Path
 PATH=$PATH:~/.cabal/bin
+
+# Switch Ctrl and Caplocks
+/usr/bin/setxkbmap -option "ctrl:swapcaps"
