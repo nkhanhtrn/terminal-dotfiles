@@ -1,6 +1,6 @@
 ; ================================================================
 ; misc settings
-(setq user-mail-address "nkhanhtran@cogini.com")
+(setq user-mail-address "thek.trn@gmail.com")
 (setq-default case-fold-search t)
 (set-language-environment "UTF-8")
 (setq backup-directory-alist
@@ -19,6 +19,9 @@
 (setq-default save-place t)
 (require 'saveplace)
 
+; ===============================================================
+; adjust some defaults key binding
+(global-set-key (kbd "C-x C-b") 'ibuffer)
 
 ; ================================================================
 ; package manager
@@ -37,12 +40,6 @@
   (package-refresh-contents))
 (defvar nkhanhtran/elpa-packages
   '(
-    ; evil-mode
-    evil
-    evil-tabs
-    ; Color theme
-    ;color-theme
-    ;color-theme-solarized
     ; IDE plugins
     flycheck
     auto-complete
@@ -50,6 +47,8 @@
     elisp-slime-nav
     ; Web Mode
     web-mode
+    ; C/C++
+    ggtags    
     ; Dired dired-details
     dired-details+
     dired+
@@ -68,17 +67,6 @@
 (setq custom-theme-directory "~/.emacs.d/lib/themes/")
 (add-to-list 'custom-theme-load-path custom-theme-directory)
 (load-theme 'nk t)
-
-
-; ================================================================
-; evil-mode
-(require 'evil)
-(evil-mode 1)
-(global-evil-tabs-mode t)
-;(setq evil-emacs-state-cursor '("white" bar))
-;(setq evil-visual-state-cursor '("YellowGreen" box))
-;(setq evil-insert-state-cursor '("white" bar))
-
 
 ; ================================================================
 ; Lisp Mode
@@ -111,10 +99,10 @@
 (define-key global-map (kbd "RET") 'newline-and-indent)
 
 ; evil key
-(define-key evil-normal-state-map (kbd "C-h") 'evil-window-left)
-(define-key evil-normal-state-map (kbd "C-j") 'evil-window-down)
-(define-key evil-normal-state-map (kbd "C-k") 'evil-window-up)
-(define-key evil-normal-state-map (kbd "C-l") 'evil-window-right)
+;(define-key evil-normal-state-map (kbd "C-h") 'evil-window-left)
+;(define-key evil-normal-state-map (kbd "C-j") 'evil-window-down)
+;(define-key evil-normal-state-map (kbd "C-k") 'evil-window-up)
+;(define-key evil-normal-state-map (kbd "C-l") 'evil-window-right)
 ;(define-key evil-normal-state-map (kbd "M-k") (lambda ()
 ;                    (interactive)
 ;                    (evil-scroll-up nil)))
@@ -145,16 +133,16 @@
   (setq web-mode-code-indent-offset 4)
 
   ; shortcuts
-  (define-key web-mode-map (kbd "M-f") 'web-mode-fold-or-unfold)
-  (define-key web-mode-map (kbd "M-j") 'web-mode-element-next)
-  (define-key web-mode-map (kbd "M-k") 'web-mode-element-previous)
-  (define-key web-mode-map (kbd "M-l") 'web-mode-element-child)
-  (define-key web-mode-map (kbd "M-h") 'web-mode-element-parent)
-  (define-key web-mode-map (kbd "M-;") 'web-mode-navigate)
-  (define-key web-mode-map (kbd "M-n") 'web-mode-comment-or-uncomment)
-  (define-key web-mode-map (kbd "M-v") 'web-mode-mark-and-expand)
-  (define-key web-mode-map (kbd "M-r") 'web-mode-reload)
-  (define-key web-mode-map (kbd "M-w") 'web-mode-whitespaces-show)
+  ;(define-key web-mode-map (kbd "M-f") 'web-mode-fold-or-unfold)
+  ;(define-key web-mode-map (kbd "M-j") 'web-mode-element-next)
+  ;(define-key web-mode-map (kbd "M-k") 'web-mode-element-previous)
+  ;(define-key web-mode-map (kbd "M-l") 'web-mode-element-child)
+  ;(define-key web-mode-map (kbd "M-h") 'web-mode-element-parent)
+  ;(define-key web-mode-map (kbd "M-;") 'web-mode-navigate)
+  ;(define-key web-mode-map (kbd "M-n") 'web-mode-comment-or-uncomment)
+  ;(define-key web-mode-map (kbd "M-v") 'web-mode-mark-and-expand)
+  ;(define-key web-mode-map (kbd "M-r") 'web-mode-reload)
+  ;(define-key web-mode-map (kbd "M-w") 'web-mode-whitespaces-show)
 
   ; auto completion
   (setq web-mode-ac-sources-alist
@@ -164,3 +152,22 @@
 )
 
 (add-hook 'web-mode-hook 'web-mode-hook)
+
+;; ggtags
+(require 'ggtags)
+(add-hook 'c-mode-common-hook
+          (lambda ()
+            (when (derived-mode-p 'c-mode 'c++-mode 'java-mode 'asm-mode)
+              (ggtags-mode 1))))
+
+(define-key ggtags-mode-map (kbd "C-c g s") 'ggtags-find-other-symbol)
+(define-key ggtags-mode-map (kbd "C-c g h") 'ggtags-view-tag-history)
+(define-key ggtags-mode-map (kbd "C-c g r") 'ggtags-find-reference)
+(define-key ggtags-mode-map (kbd "C-c g f") 'ggtags-find-file)
+(define-key ggtags-mode-map (kbd "C-c g c") 'ggtags-create-tags)
+(define-key ggtags-mode-map (kbd "C-c g u") 'ggtags-update-tags)
+
+(define-key ggtags-mode-map (kbd "M-,") 'pop-tag-mark)
+
+;; pdf-tools
+(pdf-tools-install)
