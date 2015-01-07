@@ -25,24 +25,13 @@ if [ ! -d "$HOME/.config/xfce4/terminal" ]; then
 fi
 
 # emacs folder preparation
-if [ "$HOME/.emacs" ]; then
-    rm $HOME/.emacs
-fi
 if [ ! -d "$HOME/.emacs.d" ]; then
     mkdir $HOME/.emacs.d
 fi
-
-#### Oh-My-Zsh ####
-echo "======= ZSH Setup ======="
-chsh -s /bin/zsh
-git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
-cp zsh/_config $HOME/.zshrc
-echo "=========================\n"
-
 #### Emacs ####
 echo "======= Emacs Setup ======"
 cp -r emacs/* $HOME/.emacs.d/
-echo "=========================="
+echo "==========================\n"
 
 #### Vim ####
 echo "======= Vim Setup ======="
@@ -64,8 +53,6 @@ echo "======= NVM Setup ======="
 git clone https://github.com/creationix/nvm.git ~/.nvm
 echo "===============================\n"
 
-echo "=========================\n"
-
 #### Terminal Configuration ####
 echo "======= XFCE4 Terminal setup ======="
 cp terminal/_config $HOME/.config/xfce4/terminal/terminalrc
@@ -75,3 +62,11 @@ echo "==============================\n"
 echo "======= Git setup ======="
 cp git/_config $HOME/.gitconfig
 echo "=========================\n"
+
+#### Oh-My-Zsh ####
+echo "======= ZSH Setup ======="
+chsh -s /bin/zsh
+git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
+cp zsh/_config $HOME/.zshrc
+echo "=========================\n"
+
