@@ -38,7 +38,7 @@
 ; autoload packages at start
 (when (not package-archive-contents)
   (package-refresh-contents))
-(defvar nkhanhtran/elpa-packages
+(defvar nkhanhtrn/elpa-packages
   '(
     ; IDE plugins
     flycheck
@@ -57,7 +57,7 @@
     nyan-mode
     smooth-scrolling
   ))
-(dolist (p nkhanhtran/elpa-packages)
+(dolist (p nkhanhtrn/elpa-packages)
   (when (not (package-installed-p p))
     (package-install p)))
 
@@ -97,18 +97,6 @@
 ; custom keyboard shortcuts
 ; global keys
 (define-key global-map (kbd "RET") 'newline-and-indent)
-
-; evil key
-;(define-key evil-normal-state-map (kbd "C-h") 'evil-window-left)
-;(define-key evil-normal-state-map (kbd "C-j") 'evil-window-down)
-;(define-key evil-normal-state-map (kbd "C-k") 'evil-window-up)
-;(define-key evil-normal-state-map (kbd "C-l") 'evil-window-right)
-;(define-key evil-normal-state-map (kbd "M-k") (lambda ()
-;                    (interactive)
-;                    (evil-scroll-up nil)))
-;(define-key evil-normal-state-map (kbd "M-j") (lambda ()
-;                        (interactive)
-;                        (evil-scroll-down nil)))
 
 
 ; ================================================================
@@ -168,6 +156,3 @@
 (define-key ggtags-mode-map (kbd "C-c g u") 'ggtags-update-tags)
 
 (define-key ggtags-mode-map (kbd "M-,") 'pop-tag-mark)
-
-;; pdf-tools
-(pdf-tools-install)
