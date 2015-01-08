@@ -38,3 +38,6 @@ man() {
 }
 
 PATH="/usr/lib/ccache/bin/:$PATH"
+
+# live wallpaper
+#/usr/lib/xscreensaver/glmatrix -window-id $(xwininfo -name "Desktop" | grep 'Window id' | sed 's/.*\(0x[0-9a-z]*\).*/\1/g')
