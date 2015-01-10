@@ -10,14 +10,18 @@
 (tool-bar-mode 0)
 (menu-bar-mode 0)
 (setq-default indent-tabs-mode nil)
-(custom-set-variables
- '(initial-frame-alist (quote ((fullscreen . maximized))))) ;; start maximized
 (show-paren-mode t)
 (setq evil-move-cursor-back nil)
+
 ; remember cursor position
 (setq save-place-file "~/.emacs.d/saveplace")
 (setq-default save-place t)
 (require 'saveplace)
+
+; startup setting
+(custom-set-variables
+ '(inhibit-startup-screen t)
+ '(initial-frame-alist (quote ((fullscreen . maximized)))))
 
 ; ===============================================================
 ; adjust some defaults key binding
