@@ -13,13 +13,6 @@ fi
 if [ ! -d "$HOME/.vim/colors" ]; then 
     mkdir $HOME/.vim/colors
 fi
-if [ ! -d "$HOME/.fonts" ]; then 
-    mkdir $HOME/.fonts
-fi
-if [ ! -d "$HOME/.solarized" ]; then
-    mkdir $HOME/.solarized
-fi
-
 if [ ! -d "$HOME/.config/xfce4/terminal" ]; then
     mkdir $HOME/.config/xfce4/terminal
 fi
@@ -40,13 +33,6 @@ cp -r vim/vim-colors-solarized/colors/solarized.vim $HOME/.vim/colors/
 cp vim/_config $HOME/.vimrc	
 vim +BundleInstall +qall
 echo "=========================\n"
-
-#### Powerline ####
-echo "======= Powerline Setup ======="
-pip install --user git+git://github.com/Lokaltog/powerline
-cp vim/powerline-fonts/*/*.ttf $HOME/.fonts/
-fc-cache -vf $HOME/.fonts/
-echo "===============================\n"
 
 #### Nvm ####
 echo "======= NVM Setup ======="
