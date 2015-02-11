@@ -1,6 +1,9 @@
-#export PATH="/usr/lib/ccache/bin/:$PATH"
+# extra export
 PATH="/usr/lib/ccache/bin/:$PATH"
 PATH="/home/nk/.gem/ruby/2.2.0/bin/:$PATH"
+export GTK_IM_MODULE=ibus
+export XMODIFIERS=@im=ibus
+export QT_IM_MODULE=ibus
 
 # oh-my-zsh configurations
 ZSH=$HOME/.oh-my-zsh
@@ -13,7 +16,7 @@ NODEJS=(node nvm bower)
 PHP=(yii)
 RUBY=(ruby gem rails)
 PYTHON=(django pip python)
-DISTRO=(archlinux systemd)
+DISTRO=(archlinux systemd rm-confirm)
 
 plugins=($PRODUCTIVITY $BUILD $NODEJS $PHP $RUBY $PYTHON $DISTRO)
 
