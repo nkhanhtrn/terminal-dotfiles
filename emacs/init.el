@@ -1,6 +1,5 @@
 ; ================================================================
 ; misc settings
-(setq user-mail-address "thek.trn@gmail.com")
 (setq-default case-fold-search t)
 (set-language-environment "UTF-8")
 (setq backup-directory-alist
@@ -23,6 +22,9 @@
  '(inhibit-startup-screen t)
  '(initial-frame-alist (quote ((fullscreen . maximized)))))
 
+; load path
+(add-to-list 'load-path "~/.emacs.d/config/")
+
 ; ===============================================================
 ; adjust some defaults key binding
 (global-set-key (kbd "C-x C-b") 'ibuffer)
@@ -42,7 +44,7 @@
 ; autoload packages at start
 (when (not package-archive-contents)
   (package-refresh-contents))
-(defvar nkhanhtrn/elpa-packages
+(defvar nk/elpa-packages
   '(
     ; IDE plugins
     flycheck
@@ -52,7 +54,8 @@
     ; Web Mode
     web-mode
     ; C/C++
-    ggtags    
+    helm
+    helm-gtags
     ; Dired dired-details
     dired-details+
     dired+
@@ -61,7 +64,7 @@
     nyan-mode
     smooth-scrolling
   ))
-(dolist (p nkhanhtrn/elpa-packages)
+(dolist (p nk/elpa-packages)
   (when (not (package-installed-p p))
     (package-install p)))
 
@@ -124,18 +127,6 @@
   (setq web-mode-css-indent-offset 2)
   (setq web-mode-code-indent-offset 4)
 
-  ; shortcuts
-  ;(define-key web-mode-map (kbd "M-f") 'web-mode-fold-or-unfold)
-  ;(define-key web-mode-map (kbd "M-j") 'web-mode-element-next)
-  ;(define-key web-mode-map (kbd "M-k") 'web-mode-element-previous)
-  ;(define-key web-mode-map (kbd "M-l") 'web-mode-element-child)
-  ;(define-key web-mode-map (kbd "M-h") 'web-mode-element-parent)
-  ;(define-key web-mode-map (kbd "M-;") 'web-mode-navigate)
-  ;(define-key web-mode-map (kbd "M-n") 'web-mode-comment-or-uncomment)
-  ;(define-key web-mode-map (kbd "M-v") 'web-mode-mark-and-expand)
-  ;(define-key web-mode-map (kbd "M-r") 'web-mode-reload)
-  ;(define-key web-mode-map (kbd "M-w") 'web-mode-whitespaces-show)
-
   ; auto completion
   (setq web-mode-ac-sources-alist
   '(("css" . (ac-source-css-property))
@@ -145,18 +136,5 @@
 
 (add-hook 'web-mode-hook 'web-mode-hook)
 
-;; ggtags
-(require 'ggtags)
-(add-hook 'c-mode-common-hook
-          (lambda ()
-            (when (derived-mode-p 'c-mode 'c++-mode 'java-mode 'asm-mode)
-              (ggtags-mode 1))))
-
-(define-key ggtags-mode-map (kbd "C-c g s") 'ggtags-find-other-symbol)
-(define-key ggtags-mode-map (kbd "C-c g h") 'ggtags-view-tag-history)
-(define-key ggtags-mode-map (kbd "C-c g r") 'ggtags-find-reference)
-(define-key ggtags-mode-map (kbd "C-c g f") 'ggtags-find-file)
-(define-key ggtags-mode-map (kbd "C-c g c") 'ggtags-create-tags)
-(define-key ggtags-mode-map (kbd "C-c g u") 'ggtags-update-tags)
-
-(define-key ggtags-mode-map (kbd "M-,") 'pop-tag-mark)
+;; mode configuration
+(load-library "nk-helm")                       ; helm
