@@ -53,9 +53,11 @@
     elisp-slime-nav
     ; Web Mode
     web-mode
-    ; C/C++
+    ; helm
     helm
     helm-gtags
+    helm-projectile
+    helm-descbinds
     ; Dired dired-details
     dired-details+
     dired+
