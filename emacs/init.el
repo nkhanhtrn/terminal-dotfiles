@@ -140,3 +140,4 @@
 
 ;; mode configuration
 (load-library "nk-helm")                       ; helm
+(load-library "nk-helm-descbinds")             ; helm-descbinds
