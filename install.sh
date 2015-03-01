@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/bin/sh
 echo "Start install the configuration"
 
 ############# Start installer #################
