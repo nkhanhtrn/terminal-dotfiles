@@ -1,6 +1,7 @@
 ;;
-;; Helm configuration
+;; PACKAGE: helm
 ;;
+;; NOTE: configuration for Helm
 
 ; require helm
 (require 'helm)
