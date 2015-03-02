@@ -15,9 +15,9 @@
 (global-set-key (kbd "C-x C-f") 'helm-find-files)
 (global-set-key (kbd "C-c h o") 'helm-occur)
 (global-set-key (kbd "C-h SPC") 'helm-all-mark-rings)
-(global-set-key (kbd "C-c h x") 'helm-register)
-(global-set-key (kbd "C-c h g") 'helm-google-suggest)
-(global-set-key (kbd "C-c h M-:") 'helm-eval-expression-with-eldoc)
+(global-set-key (kbd "C-c C-h x") 'helm-register)
+(global-set-key (kbd "C-c C-h g") 'helm-google-suggest)
+(global-set-key (kbd "C-c C-h M-:") 'helm-eval-expression-with-eldoc)
 (global-unset-key (kbd "C-x c"))
 
 ; helm-map key set
