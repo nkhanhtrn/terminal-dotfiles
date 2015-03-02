@@ -47,8 +47,8 @@
 (defvar nk/elpa-packages
   '(
     ; IDE plugins
-    flycheck
-    auto-complete
+    sr-speedbar
+    company
     ; Lisp Mode
     elisp-slime-nav
     ; Web Mode
@@ -58,6 +58,8 @@
     helm-gtags
     helm-projectile
     helm-descbinds
+    ; C/C++
+    function-args
     ; Dired dired-details
     dired-details+
     dired+
@@ -141,3 +143,7 @@
 ;; mode configuration
 (load-library "nk-helm")                       ; helm
 (load-library "nk-helm-descbinds")             ; helm-descbinds
+(load-library "nk-helm-gtags")                 ; helm-gtags
+(load-library "nk-speedbar")                   ; sr-speedbar
+(load-library "nk-company")                    ; company-mode
+(load-library "nk-c-cpp")                      ; c/c++ mode
