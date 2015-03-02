@@ -47,6 +47,8 @@ echo "==============================\n"
 #### Git ####
 echo "======= Git setup ======="
 cp git/_config $HOME/.gitconfig
+cp git/_ignore $HOME/.gitignore_global
+git config --global core.excludesfile ~/.gitignore_global
 echo "=========================\n"
 
 #### Oh-My-Zsh ####
