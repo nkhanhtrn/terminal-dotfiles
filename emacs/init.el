@@ -60,6 +60,8 @@
     helm-descbinds
     ; C/C++
     function-args
+    ; Lua
+    lua-mode
     ; Dired dired-details
     dired-details+
     dired+
