@@ -1,7 +1,6 @@
 ; load path
 (add-to-list 'load-path "~/.emacs.d/config/")
 
-; ================================================================
 ; package manager
 (require 'package)
 (dolist (source '(("marmalade" . "http://marmalade-repo.org/packages/")
@@ -47,13 +46,6 @@
 (dolist (p nk/elpa-packages)
   (when (not (package-installed-p p))
     (package-install p)))
-
-
-; ================================================================
-; Set theme for emacs
-(setq custom-theme-directory "~/.emacs.d/lib/themes/")
-(add-to-list 'custom-theme-load-path custom-theme-directory)
-(load-theme 'nk t)
 
 ;; mode configuration
 (load-library "nk-common")                     ; common settings
