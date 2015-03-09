@@ -1,6 +1,6 @@
 # extra export
 PATH="/usr/lib/ccache/bin/:$PATH"
-PATH="/home/nk/.gem/ruby/2.2.0/bin/:$PATH"
+PATH="~/.gem/ruby/2.2.0/bin/:$PATH"
 export GTK_IM_MODULE=ibus
 export XMODIFIERS=@im=ibus
 export QT_IM_MODULE=ibus
