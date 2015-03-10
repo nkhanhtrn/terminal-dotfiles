@@ -37,3 +37,9 @@
 (setq custom-theme-directory "~/.emacs.d/lib/themes/")
 (add-to-list 'custom-theme-load-path custom-theme-directory)
 (load-theme 'nk t)
+
+; compilation support
+(global-set-key (kbd "<f5>") (lambda ()
+                               (interactive)
+                               (setq-local compilation-read-command nil)
+                               (call-interactively 'compile)))
