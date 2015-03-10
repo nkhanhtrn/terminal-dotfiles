@@ -32,8 +32,7 @@
 (setq scroll-conservatively 9999
       scroll-preserve-screen-position t)
 
-
-
-
-
-
+; PACKAGE: yasnippet
+; Usage: snippet
+(require 'yasnippet)
+(yas-global-mode 1)

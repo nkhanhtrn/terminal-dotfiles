@@ -31,6 +31,8 @@
     helm-gtags
     helm-projectile
     helm-descbinds
+    ; snippet
+    yasnippet
     ; C/C++
     function-args
     ; Lua
