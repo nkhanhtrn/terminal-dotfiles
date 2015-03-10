@@ -4,12 +4,6 @@ echo "Start install the configuration"
 ############# Start installer #################
 
 #### Initialize ####
-if [ ! -d "$HOME/.vim" ]; then 
-    mkdir $HOME/.vim
-fi
-if [ ! -d "$HOME/.vim/bundle" ]; then 
-    mkdir $HOME/.vim/bundle
-fi
 if [ ! -d "$HOME/.config/xfce4/terminal" ]; then
     mkdir $HOME/.config/xfce4/terminal
 fi
@@ -23,13 +17,6 @@ fi
 echo "======= Emacs Setup ======"
 cp -r emacs/* $HOME/.emacs.d/
 echo "==========================\n"
-
-#### Vim ####
-echo "======= Vim Setup ======="
-git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-cp vim/_config $HOME/.vimrc	
-vim +BundleInstall +qall
-echo "=========================\n"
 
 #### Nvm ####
 echo "======= NVM Setup ======="
