@@ -18,6 +18,7 @@
     ; IDE plugins
     sr-speedbar
     company
+    smartparens
     ; whitespace/indentation
     clean-aindent-mode
     dtrt-indent
@@ -57,4 +58,5 @@
 (load-library "nk-helm-gtags")                 ; helm-gtags
 (load-library "nk-speedbar")                   ; sr-speedbar
 (load-library "nk-company")                    ; company-mode
+(load-library "nk-smartparens")                ; smartparens
 (load-library "nk-c-cpp")                      ; c/c++ mode
