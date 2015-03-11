@@ -1,5 +1,6 @@
 #!/bin/sh
 
+####################### Installation Function ##########################
 # git configuration
 install_git()
 {
@@ -34,6 +35,8 @@ install_terminal()
     cp terminal/_config $HOME/.config/xfce4/terminal/terminalrc
 }
 
+
+########################### Main Function ############################
 # radiolist dialog to choose install type
 dialog\
     --title "Dotfiles Installer"\
@@ -55,9 +58,11 @@ then
     exit 0
 fi
 
-# read selection & remove tmp file
+# read input, rm input tmp, create error tmp
 read result < /tmp/dotfile-installer.tmp.$$$
 rm -f /tmp/dotfile-installer.tmp.$$$
+date > /tmp/dotfiles_error.tmp.$$$
+echo "===============================" >> /tmp/dotfiles_error.tmp.$$$
 
 # convert the selection into readable install guide
 case $result in
