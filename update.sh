@@ -56,3 +56,5 @@ update_terminal
 
 # finishing message
 read -sp "Update finished. Press <enter> to continue..."
+exit 0
+

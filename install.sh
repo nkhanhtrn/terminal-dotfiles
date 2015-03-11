@@ -87,3 +87,4 @@ esac
 
 # finishing message
 read -sp "Installation finished. Press ENTER to continue..."
+exit 0
