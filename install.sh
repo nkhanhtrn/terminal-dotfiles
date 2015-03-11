@@ -58,6 +58,22 @@ install_terminal()
     echo ""
 }
 
+# NVM install
+install_nvm()
+{
+    echo "install Node Version Manager..."
+    curl https://raw.githubusercontent.com/creationix/nvm/v0.24.0/install.sh | bash
+    echo ""
+}
+
+# RVM install
+install_rvm()
+{
+    echo "install Ruby Version Manager..."
+    curl -L get.rvm.io | bash -s stable
+    echo ""
+}
+
 
 ########################### Main Function ############################
 # radiolist dialog to choose install type
@@ -82,7 +98,9 @@ case $result in
     "Working")
         install_zsh && install_emacs;;
     "Personal")
-        install_zsh && install_emacs && install_git && install_terminal;;
+        install_zsh && install_emacs\
+            && install_git && install_terminal\
+            && install_nvm && install_rvm;;
 esac
 
 # finishing message
