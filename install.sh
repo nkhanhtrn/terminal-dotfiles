@@ -1,38 +1,87 @@
 #!/bin/sh
+REDIRECT="1> /dev/null 2>> /tmp/dotfiles_error.tmp.$$$"
 
 ####################### Installation Function ##########################
 # git configuration
 install_git()
 {
-    cp git/_config $HOME/.gitconfig
-    cp git/_ignore $HOME/.gitignore_global
-    git config --global core.excludesfile ~/.gitignore_global
+    return_val=1
+
+    if cp git/_config $HOME/.gitconfig\
+          1> /dev/null 2>> /tmp/dotfiles_error.tmp.$$$\
+            && cp git/_ignore $HOME/.gitignore_global\
+                  1> /dev/null 2>> /tmp/dotfiles_error.tmp.$$$\
+            && git config --global core.excludesfile ~/.gitignore_global\
+                   1> /dev/null 2>> /tmp/dotfiles_error.tmp.$$$
+    then
+        return_val=0
+    fi
+
+    return $return_val
 }
 
 # zsh configuration
 install_zsh()
 {
-    git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh\
-        1> /dev/null 2>> /tmp/dotfiles_error.tmp.$$$
-    cp zsh/_config $HOME/.zshrc
+    return_val=1
+
+    if git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh\
+           1> /dev/null 2>> /tmp/dotfiles_error.tmp.$$$\
+            && cp zsh/_config $HOME/.zshrc\
+                  1> /dev/null 2>> /tmp/dotfiles_error.tmp.$$$
+    then
+        return_val=0
+    fi
+
+    return $return_val
 }
 
 # emacs configuration
 install_emacs()
 {
-    if [ ! -d "$HOME/.emacs.d" ]; then
-        mkdir $HOME/.emacs.d
+    return_val=1
+
+    if [ ! -d $HOME/.emacs.d ]
+    then
+        if mkdir $HOME/.emacs.d\
+              1> /dev/null 2>> /tmp/dotfiles_error.tmp.$$$
+        then
+            return_val=0
+        fi
     fi
-    cp -r emacs/* $HOME/.emacs.d/
+
+    if cp -r emacs/* $HOME/.emacs.d\
+          1> /dev/null 2>> /tmp/dotfiles_error.tmp.$$$
+    then
+        return_val=0
+    fi
+
+    return $return_val
 }
 
 # terminal configuration
 install_terminal()
 {
-    if [ ! -d "$HOME/.config/xfce4/terminal" ]; then
-        mkdir $HOME/.config/xfce4/terminal
+    return_val=1
+
+    if [ ! -d $HOME/.config/xfce4/terminal ]
+    then
+        if mkdir -p $HOME/.config/xfce4/terminal\
+                 1> /dev/null 2>> /tmp/dotfiles_error.tmp.$$$
+        then
+            return_val=0
+        fi
     fi
-    cp terminal/_config $HOME/.config/xfce4/terminal/terminalrc
+
+    if cp terminal/_config $HOME/.config/xfce4/terminal/terminalrc\
+          1> /dev/null 2>> /tmp/dotfiles_error.tmp.$$$
+    then
+        return_val=0
+    else
+        return_val=1
+    fi
+
+    return $return_val
 }
 
 
@@ -67,14 +116,24 @@ echo "===============================" >> /tmp/dotfiles_error.tmp.$$$
 # convert the selection into readable install guide
 case $result in
     "Basic")
-        install_zsh
-        install_emacs;;
+        if install_zsh && install_emacs
+        then
+            rm /tmp/dotfiles_error.tmp.$$$
+        else
+            cp /tmp/dotfiles_error.tmp.$$$ dotfiles_error
+        fi;;
     "Working")
-        install_zsh
-        install_emacs;;
+        if install_zsh && install_emacs
+        then
+            rm /tmp/dotfiles_error.tmp.$$$
+        else
+            cp /tmp/dotfiles_error.tmp.$$$ dotfiles_error
+        fi;;
     "Personal")
-        install_zsh
-        install_emacs
-        install_git
-        install_terminal;;
+        if install_zsh && install_emacs && install_git && install_terminal
+        then
+            rm /tmp/dotfiles_error.tmp.$$$
+        else
+            cp /tmp/dotfiles_error.tmp.$$$ dotfiles_error
+        fi;;
 esac
