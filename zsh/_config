@@ -1,6 +1,6 @@
 # extra export
 PATH="/usr/lib/ccache/bin/:$PATH"
-PATH="~/.gem/ruby/2.2.0/bin/:$PATH"
+
 export GTK_IM_MODULE=ibus
 export XMODIFIERS=@im=ibus
 export QT_IM_MODULE=ibus
@@ -20,13 +20,21 @@ DISTRO=(archlinux systemd rm-confirm)
 
 plugins=($PRODUCTIVITY $BUILD $NODEJS $PHP $RUBY $PYTHON $DISTRO)
 
-# oh-my-zsh source
-source $ZSH/oh-my-zsh.sh
-
-# nvm
-source $HOME/.nvm/nvm.sh
-nvm use 0.12 1>/dev/null
-
 # Switch Ctrl and Caplocks
 /usr/bin/setxkbmap -option "ctrl:swapcaps"
 
+# oh-my-zsh
+if [ -f $ZSH/oh-my-zsh.sh ]; then
+    source "$ZSH/oh-my-zsh.sh"
+fi
+
+# nvm
+if [ -f $HOME/.nvm/nvm.sh ]; then
+    source "$HOME/.nvm/nvm.sh"
+    nvm use 0.12 2>&1
+fi
+
+# rvm
+if [ -f $HOME/.rvm/script/rvm ]; then
+    source "$HOME/.rvm/scripts/rvm"
+fi
