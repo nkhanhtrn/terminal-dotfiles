@@ -75,6 +75,7 @@ read result < "$select"
 rm -f "$select"
 
 # convert the selection into readable install guide
+echo -e "\n=================== INSTALL ========================="
 case $result in
     "Basic")
         install_zsh && install_emacs;;
