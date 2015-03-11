@@ -55,6 +55,4 @@ update_zsh
 update_terminal
 
 # finishing message
-echo "Update finished. Press <enter> to continue..."
-read end
-exit 0
+read -sp "Update finished. Press <enter> to continue..."

@@ -86,6 +86,4 @@ case $result in
 esac
 
 # finishing message
-echo "Installation finished. Press <enter> to continue..."
-read end
-exit 0
+read -sp "Installation finished. Press ENTER to continue..."
