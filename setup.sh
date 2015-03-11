@@ -1,6 +1,6 @@
 #!/bin/bash
 
-menu_choice="/tmp/dotfile-menu.tmp.$$$"
+menu_choice="/tmp/dotfile_menu.tmp.$$$"
 dialog=""
 result=0
 
@@ -30,8 +30,8 @@ do
     # convert the selection into readable install guide
     case $result in
         1)
-            /bin/bash install.sh;;
+            /bin/bash install.sh "$dialog";;
         2)
-            /bin/bash update.sh;;
+            /bin/bash update.sh "$dialog";;
     esac
 done
