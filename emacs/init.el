@@ -38,6 +38,8 @@
     function-args
     ; Lua
     lua-mode
+    ; Markdown
+    markdown-mode
     ; Dired dired-details
     dired-details+
     dired+
@@ -59,4 +61,5 @@
 (load-library "nk-speedbar")                   ; sr-speedbar
 (load-library "nk-company")                    ; company-mode
 (load-library "nk-smartparens")                ; smartparens
-(load-library "nk-c-cpp")                      ; c/c++ mode
+(load-library "nk-c-cpp")                      ; c/c++
+(load-library "nk-markdown")                   ; markdown
