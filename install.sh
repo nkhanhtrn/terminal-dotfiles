@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 output='/tmp/dotfiles_error.tmp.$$$'
 select='/tmp/dotfiles_install.tmp.$$$'
 error='dotfiles_error'
