@@ -49,7 +49,13 @@ install_terminal()
 ########################### Main Function ############################
 
 # check if whiptail or dialog is install
+dialog=""
 read dialog <<< "$(which whiptail dialog 2> /dev/null)"
+if [ -z $dialog ]
+then
+   echo "Whiptail or Dialog not found. Please install one of them first!"
+   exit 1
+fi
 
 # radiolist dialog to choose install type
 $dialog\
