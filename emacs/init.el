@@ -17,7 +17,8 @@
   '(
     ; IDE plugins
     sr-speedbar
-    company
+    auto-complete
+    pos-tip
     smartparens
     ; whitespace/indentation
     clean-aindent-mode
@@ -25,7 +26,7 @@
     ws-butler
     ; Lisp Mode
     elisp-slime-nav
-    ; Web Mode
+    ; HTML/CSS/JavaScript
     web-mode
     ; helm
     helm
@@ -59,7 +60,8 @@
 (load-library "nk-helm-descbinds")             ; helm-descbinds
 (load-library "nk-helm-gtags")                 ; helm-gtags
 (load-library "nk-speedbar")                   ; sr-speedbar
-(load-library "nk-company")                    ; company-mode
+(load-library "nk-autocomplete")                    ; auto-complete
 (load-library "nk-smartparens")                ; smartparens
 (load-library "nk-c-cpp")                      ; c/c++
 (load-library "nk-markdown")                   ; markdown
+(load-library "nk-webmode")                   ; web-mode
