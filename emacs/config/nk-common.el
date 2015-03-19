@@ -34,9 +34,9 @@
 (setq-default tab-width 4)
 
 ; set theme
-(setq custom-theme-directory "~/.emacs.d/lib/themes/")
+(setq custom-theme-directory "~/.emacs.d/themes/")
 (add-to-list 'custom-theme-load-path custom-theme-directory)
-(load-theme 'nk t)
+(load-theme 'solarized-dark t)
 
 ; compilation support
 (global-set-key (kbd "<f5>") (lambda ()

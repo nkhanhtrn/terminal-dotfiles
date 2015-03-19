@@ -48,6 +48,8 @@
     ; misc plugins
     nyan-mode
     smooth-scrolling
+    ; theme
+    solarized-theme
   ))
 (dolist (p nk/elpa-packages)
   (when (not (package-installed-p p))
