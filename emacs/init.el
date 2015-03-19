@@ -17,7 +17,7 @@
   '(
     ; IDE plugins
     sr-speedbar
-    auto-complete
+    company
     pos-tip
     smartparens
     ; whitespace/indentation
@@ -61,8 +61,8 @@
 (load-library "nk-helm")                       ; helm
 (load-library "nk-helm-descbinds")             ; helm-descbinds
 (load-library "nk-helm-gtags")                 ; helm-gtags
+(load-library "nk-company")                    ; company
 (load-library "nk-speedbar")                   ; sr-speedbar
-(load-library "nk-autocomplete")                    ; auto-complete
 (load-library "nk-smartparens")                ; smartparens
 (load-library "nk-c-cpp")                      ; c/c++
 (load-library "nk-markdown")                   ; markdown
