@@ -18,7 +18,6 @@
     ; IDE plugins
     sr-speedbar
     company
-    pos-tip
     smartparens
     ; whitespace/indentation
     clean-aindent-mode
