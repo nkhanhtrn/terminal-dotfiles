@@ -47,6 +47,7 @@
     ; misc plugins
     nyan-mode
     smooth-scrolling
+    rainbow-mode
     ; theme
     solarized-theme
   ))
