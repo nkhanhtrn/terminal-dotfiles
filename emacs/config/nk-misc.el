@@ -36,3 +36,8 @@
 ; Usage: snippet
 (require 'yasnippet)
 (yas-global-mode 1)
+
+; PACKAGE: golden-ratio
+; Usage: divide buffers
+(require 'golden-ratio)
+(golden-ratio-mode 1)
