@@ -37,3 +37,8 @@ fi
 if [ -f $HOME/.rvm/script/rvm ]; then
     source "$HOME/.rvm/scripts/rvm"
 fi
+
+# Doge
+alias such=git
+alias very=git
+alias wow='git status'
