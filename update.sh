@@ -19,6 +19,7 @@ update_zsh()
     if [ -d $HOME/.oh-my-zsh ] && [ -f $HOME/.zshrc ]
     then
         echo "update zsh configuration..."
+        git -C $HOME/.oh-my-zsh pull origin master
         cp zsh/_config $HOME/.zshrc
         echo ""
     fi
