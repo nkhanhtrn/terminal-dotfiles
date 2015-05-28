@@ -42,7 +42,7 @@ install_emacs()
         mkdir $HOME/.emacs.d
     fi
     echo "install emacs configuration..."
-    cp -r emacs/* $HOME/.emacs.d
+    git clone git://github.com/nkhanhtrn/emacs.d ~/.emacs.d
     echo ""
 }
 

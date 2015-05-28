@@ -30,7 +30,7 @@ update_emacs()
     if [ -d $HOME/.emacs.d ]
     then
         echo "update emacs configuration..."
-        cp -r emacs/* $HOME/.emacs.d
+        git -C $HOME/.emacs.d pull origin master
         echo ""
     fi
 }
@@ -50,9 +50,9 @@ update_terminal()
 ########################### Main Function ############################
 echo -e "\n=================== UPDATE ========================="
 update_git
-update_emacs
 update_zsh
 update_terminal
+update_emacs
 
 # finishing message
 read -sp "Update finished. Press <enter> to continue..."
