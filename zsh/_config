@@ -1,9 +1,13 @@
 # extra export
 PATH="/usr/lib/ccache/bin/:$PATH"
 
+# Switch Ctrl and Caplocks
+/usr/bin/setxkbmap -option "ctrl:swapcaps"
+
 export GTK_IM_MODULE=ibus
 export XMODIFIERS=@im=ibus
 export QT_IM_MODULE=ibus
+ibus-daemon -drx
 
 # oh-my-zsh configurations
 ZSH=$HOME/.oh-my-zsh
@@ -34,6 +38,6 @@ if [ -f $HOME/.nvm/nvm.sh ]; then
 fi
 
 # rvm
-if [ -f $HOME/.rvm/script/rvm ]; then
+if [ -f $HOME/.rvm/scripts/rvm ]; then
     source "$HOME/.rvm/scripts/rvm"
 fi
