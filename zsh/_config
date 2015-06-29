@@ -7,7 +7,6 @@ PATH="/usr/lib/ccache/bin/:$PATH"
 export GTK_IM_MODULE=ibus
 export XMODIFIERS=@im=ibus
 export QT_IM_MODULE=ibus
-ibus-daemon -drx
 
 # oh-my-zsh configurations
 ZSH=$HOME/.oh-my-zsh
@@ -41,3 +40,6 @@ fi
 if [ -f $HOME/.rvm/scripts/rvm ]; then
     source "$HOME/.rvm/scripts/rvm"
 fi
+
+# Sync backup
+alias sync-arch="sudo rsync -aAXvH --delete --exclude={"/dev/*","/proc/*","/sys/*","/tmp/*","/run/*","/mnt/*","/media/*","/home/*","/var/lib/docker/*","lost+found/*"} /* /home/nk/VM/ArchCurrent"
