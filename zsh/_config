@@ -42,4 +42,6 @@ if [ -f $HOME/.rvm/scripts/rvm ]; then
 fi
 
 # Sync backup
-alias sync-arch="sudo rsync -aAXvH --delete --exclude={"/dev/*","/proc/*","/sys/*","/tmp/*","/run/*","/mnt/*","/media/*","/home/*","/var/lib/docker/*","lost+found/*"} /* /home/nk/VM/ArchCurrent"
+alias sync-arch="sudo rsync -aAXvH --delete --exclude={"/dev/*","/proc/*","/sys/*","/tmp/*","/run/*","/mnt/*","/media/*","/home/*","/var/lib/docker/*","lost+found/*","/opt/Steam/*"} /* /home/nk/VM/ArchCurrent"
+
+alias kali="docker run -t -i kalilinux/kali-linux-docker /bin/bash"
