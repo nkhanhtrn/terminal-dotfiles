@@ -4,10 +4,6 @@ PATH="/usr/lib/ccache/bin/:$PATH"
 # Switch Ctrl and Caplocks
 /usr/bin/setxkbmap -option "ctrl:swapcaps"
 
-export GTK_IM_MODULE=ibus
-export XMODIFIERS=@im=ibus
-export QT_IM_MODULE=ibus
-
 # oh-my-zsh configurations
 ZSH=$HOME/.oh-my-zsh
 ZSH_THEME='bureau'
@@ -16,15 +12,12 @@ ZSH_THEME='bureau'
 PRODUCTIVITY=(colored-man colorize command-not-found)
 BUILD=(bower docker git vagrant)
 NODEJS=(node nvm bower)
-PHP=(yii)
-RUBY=(ruby gem rails)
+#PHP=(yii)
+#RUBY=(ruby gem rails)
 PYTHON=(django pip python)
 DISTRO=(archlinux systemd rm-confirm)
 
-plugins=($PRODUCTIVITY $BUILD $NODEJS $PHP $RUBY $PYTHON $DISTRO)
-
-# Switch Ctrl and Caplocks
-/usr/bin/setxkbmap -option "ctrl:swapcaps"
+plugins=($PRODUCTIVITY $BUILD $NODEJS $PYTHON $DISTRO)
 
 # oh-my-zsh
 if [ -f $ZSH/oh-my-zsh.sh ]; then
@@ -37,12 +30,5 @@ if [ -f $HOME/.nvm/nvm.sh ]; then
     nvm use stable
 fi
 
-# rvm
-if [ -f $HOME/.rvm/scripts/rvm ]; then
-    source "$HOME/.rvm/scripts/rvm"
-fi
-
 # Sync backup
 alias sync-arch="sudo rsync -aAXvH --delete --exclude={"/dev/*","/proc/*","/sys/*","/tmp/*","/run/*","/mnt/*","/media/*","/home/*","/var/lib/docker/*","lost+found/*","/opt/Steam/*"} /* /home/nk/VM/ArchCurrent"
-
-alias kali="docker run -t -i kalilinux/kali-linux-docker /bin/bash"
