@@ -42,7 +42,7 @@ install_conkeror()
         mkdir $HOME/.conkerorrc
     fi
     echo "Install Conkeror Configuration..."
-    git clone git://github.com/nkhanhtrn/conkerrorrc $HOME/.conkerorrc
+    git clone git://github.com/nkhanhtrn/conkerorrc $HOME/.conkerorrc
     echo ""
 }
 
@@ -69,16 +69,22 @@ install_nvm()
 }
 
 ########################### Main Function ############################
-echo -e "\n=================== INSTALL ========================="
+header="\n=================== INSTALL ========================="
 case $result in
-    "Basic")
+    "basic")
+        echo -e $header
         install_zsh && install_emacs && install_conkeror;;
-    "Working")
+    "working")
+        echo -e $header
         install_zsh && install_emacs install_conkeror;;
-    "Personal")
+    "personal")
+        echo -e $header
         install_zsh && install_emacs\
             && install_git && install_conkeror\
             && install_terminal && install_nvm;;
+    *)
+        echo $"Usage: $0 {basic|working|personal}"
+        exit 1
 esac
 
 # finishing message

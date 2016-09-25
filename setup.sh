@@ -35,10 +35,10 @@ do
             $dialog\
                 --title "Dotfiles Installer"\
                 --backtitle "Dotfiles Installer"\
-                --radiolist "\nChoose the desire type of installation\n" 12 40 3\
-                "Basic" "zsh + emacs" on\
-                "Working" "zsh + emacs + git" off\
-                "Personal" "All configurations" off\
+                --radiolist "\nChoose the desired type of installation\n" 12 40 3\
+                "basic" "zsh + emacs + conkeror" on\
+                "working" "zsh + emacs + git" off\
+                "personal" "all configurations" off\
                 2> "$select"
 
             # read input, rm input tmp, create error tmp
