@@ -9,7 +9,7 @@ select='/tmp/dotfiles_install.tmp.$$$'
 read dialog <<< "$(which whiptail dialog 2> /dev/null)"
 if [ -z $dialog ]
 then
-    echo "Whiptail or Dialog not found. Please install one of them first!"
+    echo "Whiptail or Dialog not found. Please run the setup directly from install.sh or update.sh"
     exit 1
 fi
 
