@@ -12,10 +12,9 @@ ZSH_THEME='bureau'
 PRODUCTIVITY=(colored-man colorize command-not-found)
 BUILD=(bower docker git vagrant)
 NODEJS=(node nvm bower)
-#PHP=(yii)
-#RUBY=(ruby gem rails)
-PYTHON=(django pip python)
-DISTRO=(archlinux systemd rm-confirm)
+RUBY=(ruby gem)
+PYTHON=(pip python)
+DISTRO=(archlinux systemd)
 
 plugins=($PRODUCTIVITY $BUILD $NODEJS $PYTHON $DISTRO)
 
