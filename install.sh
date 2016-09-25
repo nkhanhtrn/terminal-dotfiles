@@ -5,19 +5,19 @@ result=$1
 # git configuration
 install_git()
 {
-    echo "install git configuration..."
+    echo "Install Git Configuration..."
     cp git/_config $HOME/.gitconfig
     cp git/_ignore $HOME/.gitignore_global
-    git config --global core.excludesfile ~/.gitignore_global
+    git config --global core.excludesfile $HOME/.gitignore_global
     echo ""
 }
 
 # zsh configuration
 install_zsh()
 {
-    echo "install oh-my-zsh..."
-    git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
-    echo "install zsh configuration..."
+    echo "Install oh-my-zsh..."
+    git clone git://github.com/robbyrussell/oh-my-zsh.git $HOME/.oh-my-zsh
+    echo "Install ZSH Configuration..."
     cp zsh/_config $HOME/.zshrc
     echo ""
 }
@@ -30,7 +30,19 @@ install_emacs()
         mkdir $HOME/.emacs.d
     fi
     echo "install emacs configuration..."
-    git clone git://github.com/nkhanhtrn/emacs.d ~/.emacs.d
+    git clone git://github.com/nkhanhtrn/emacs.d $HOME/.emacs.d
+    echo ""
+}
+
+# conkeror configuration
+install_conkeror()
+{
+    if [ ! -d $HOME/.conkerorrc ]
+    then
+        mkdir $HOME/.conkerorrc
+    fi
+    echo "Install Conkeror Configuration..."
+    git clone git://github.com/nkhanhtrn/conkerrorrc $HOME/.conkerorrc
     echo ""
 }
 
@@ -41,7 +53,7 @@ install_terminal()
     then
         mkdir -p $HOME/.config/xfce4/terminal
     fi
-    echo "install xfce4-terminal configuration..."
+    echo "Install Terminal Configuration..."
     cp terminal/_config $HOME/.config/xfce4/terminal/terminalrc
     echo ""
 }
@@ -60,13 +72,13 @@ install_nvm()
 echo -e "\n=================== INSTALL ========================="
 case $result in
     "Basic")
-        install_zsh && install_emacs;;
+        install_zsh && install_emacs && install_conkeror;;
     "Working")
-        install_zsh && install_emacs;;
+        install_zsh && install_emacs install_conkeror;;
     "Personal")
         install_zsh && install_emacs\
-            && install_git && install_terminal\
-            && install_nvm;;
+            && install_git && install_conkeror\
+            && install_terminal && install_nvm;;
 esac
 
 # finishing message
