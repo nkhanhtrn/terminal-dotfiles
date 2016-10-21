@@ -34,18 +34,6 @@ install_emacs()
     echo ""
 }
 
-# conkeror configuration
-install_conkeror()
-{
-    if [ ! -d $HOME/.conkerorrc ]
-    then
-        mkdir $HOME/.conkerorrc
-    fi
-    echo "Install Conkeror Configuration..."
-    git clone git://github.com/nkhanhtrn/conkerorrc $HOME/.conkerorrc
-    echo ""
-}
-
 # terminal configuration
 install_terminal()
 {
@@ -73,14 +61,14 @@ header="\n=================== INSTALL ========================="
 case $result in
     "basic")
         echo -e $header
-        install_zsh && install_emacs && install_conkeror;;
+        install_zsh && install_emacs;;
     "working")
         echo -e $header
-        install_zsh && install_emacs install_conkeror;;
+        install_zsh && install_emacs;;
     "personal")
         echo -e $header
         install_zsh && install_emacs\
-            && install_git && install_conkeror\
+            && install_git\
             && install_terminal && install_nvm;;
     *)
         echo $"Usage: $0 {basic|working|personal}"
