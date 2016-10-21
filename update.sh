@@ -36,17 +36,6 @@ update_emacs()
     fi
 }
 
-# conkeror configuration
-update_conkeror()
-{
-    if [ -d $HOME/.conkerorrc ]
-    then
-        echo "Update Conkeror Configuration..."
-        git -C $HOME/.conkerorrc pull origin master
-        echo ""
-    fi
-}
-
 # terminal configuration
 update_terminal()
 {
@@ -64,9 +53,8 @@ echo -e "\n=================== UPDATE ========================="
 update_git
 update_zsh
 update_terminal
-update_conkeror
 update_emacs
 
 # finishing message
-read -sp "Update finished. Press <ENTER> to continue..."
+read -sp "Update finished. Press <ENTER> to continue...\n"
 exit 0
