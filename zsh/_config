@@ -14,7 +14,7 @@ BUILD=(bower docker git vagrant)
 NODEJS=(node nvm bower)
 RUBY=(ruby gem)
 PYTHON=(pip python)
-DISTRO=(archlinux systemd)
+DISTRO=(systemd)
 
 plugins=($PRODUCTIVITY $BUILD $NODEJS $PYTHON $DISTRO)
 
@@ -28,6 +28,3 @@ if [ -f $HOME/.nvm/nvm.sh ]; then
     source "$HOME/.nvm/nvm.sh"
     nvm use stable
 fi
-
-# Sync backup
-alias sync-arch="sudo rsync -aAXvH --delete --exclude={"/dev/*","/proc/*","/sys/*","/tmp/*","/run/*","/mnt/*","/media/*","/home/*","/var/lib/docker/*","lost+found/*","/opt/Steam/*"} /* /home/nk/VM/ArchCurrent"
