@@ -6,7 +6,7 @@ ZSH=$HOME/.oh-my-zsh
 ZSH_THEME='bureau'
 
 # oh-my-zsh plugins
-PRODUCTIVITY=(colored-man colorize command-not-found)
+PRODUCTIVITY=(colored-man colorize)
 BUILD=(bower docker git vagrant)
 NODEJS=(node nvm bower)
 RUBY=(ruby gem)

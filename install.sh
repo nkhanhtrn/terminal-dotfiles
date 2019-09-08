@@ -56,12 +56,13 @@ case $result in
         install_zsh && install_git && install_nvm;;
     "personal")
         echo -e $header
-        install_zsh && install_git && install_terminal && install_other && install_nvm;;
+        install_zsh && install_git && install_terminal && install_others && install_nvm;;
     *)
         echo $"Usage: $0 {basic|working|personal}"
         exit 1
 esac
 
 # finishing message
-read -sp "Installation finished. Press ENTER to continue...\n"
+read -sp "Installation finished. Press ENTER to continue..."
+echo "\n"
 exit 0
