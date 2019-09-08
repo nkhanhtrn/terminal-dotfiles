@@ -1,7 +1,7 @@
 # Switch Ctrl and Caplocks
 # usr/bin/setxkbmap -option "ctrl:swapcaps"
 
-# oh-my-zsh configurations
+# oh-my-zsh configuration
 ZSH=$HOME/.oh-my-zsh
 ZSH_THEME='bureau'
 
@@ -28,3 +28,6 @@ fi
 
 # alias
 command -v python3 >/dev/null && alias pip3='python3 -m pip'
+command -v git >/dev/null && \
+alias gpull="git pull origin $(git branch | grep \* | cut -d ' ' -f2)" && \
+alias gpush="git push origin $(git branch | grep \* | cut -d ' ' -f2)"
