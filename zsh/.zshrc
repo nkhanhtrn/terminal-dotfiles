@@ -1,5 +1,5 @@
 # Switch Ctrl and Caplocks
-/usr/bin/setxkbmap -option "ctrl:swapcaps"
+# usr/bin/setxkbmap -option "ctrl:swapcaps"
 
 # oh-my-zsh configurations
 ZSH=$HOME/.oh-my-zsh

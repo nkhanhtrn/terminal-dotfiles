@@ -15,7 +15,7 @@ install_zsh()
     echo "Install oh-my-zsh..."
     git clone git://github.com/robbyrussell/oh-my-zsh.git $HOME/.oh-my-zsh
     echo "Install ZSH Configuration..."
-    cp -r zsh/* $HOME/
+    cp zsh/.zshrc $HOME/
     echo ""
 }
 
