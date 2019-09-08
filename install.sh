@@ -36,12 +36,13 @@ install_others()
     echo ""
 }
 
-install_nvm()
+install_node()
 {
-    echo "install Node Version Manager..."
+    echo "install Node JS and packages"
     curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
     source "$HOME/.nvm/nvm.sh"
     nvm install stable
+    npm install -g webpack ngrok http-server
     echo ""
 }
 
@@ -53,10 +54,10 @@ case $result in
         install_zsh;;
     "working")
         echo -e $header
-        install_zsh && install_git && install_nvm;;
+        install_zsh && install_git && install_node;;
     "personal")
         echo -e $header
-        install_zsh && install_git && install_terminal && install_others && install_nvm;;
+        install_zsh && install_git && install_terminal && install_others && install_node;;
     *)
         echo $"Usage: $0 {basic|working|personal}"
         exit 1
@@ -64,5 +65,4 @@ esac
 
 # finishing message
 read -sp "Installation finished. Press ENTER to continue..."
-echo "\n"
 exit 0
