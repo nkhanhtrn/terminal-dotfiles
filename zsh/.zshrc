@@ -1,6 +1,3 @@
-# extra export
-PATH="/usr/lib/ccache/bin/:$PATH"
-
 # Switch Ctrl and Caplocks
 /usr/bin/setxkbmap -option "ctrl:swapcaps"
 
@@ -28,3 +25,6 @@ if [ -f $HOME/.nvm/nvm.sh ]; then
     source "$HOME/.nvm/nvm.sh"
     nvm use stable
 fi
+
+# alias
+command -v python3 >/dev/null && alias pip3='python3 -m pip'
