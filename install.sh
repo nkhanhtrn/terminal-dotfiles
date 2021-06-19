@@ -5,7 +5,8 @@ result=$1
 install_git()
 {
     echo "Install Git Configuration..."
-    cp -r git $HOME/
+    cp git/gitignore_global $HOME/.gitignore_global
+    cp git/config $HOME/.gitconfig
     git config --global core.excludesfile $HOME/.gitignore_global
     echo ""
 }
@@ -29,13 +30,13 @@ install_terminal()
     echo ""
 }
 
-install_others()
+install_vim()
 {
-    echo "Install other configurations..."
-    cp -r others/* $HOME/
-    echo ""
+    echo "Install Vim"
+    curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+            https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim && cp vim/config $HOME/.vimrc
 }
-
+    
 install_node()
 {
     echo "install Node JS and packages"
@@ -51,13 +52,13 @@ header="\n=================== INSTALL ========================="
 case $result in
     "basic")
         echo -e $header
-        install_zsh;;
+        install_zsh && install_vim;;
     "working")
         echo -e $header
-        install_zsh && install_git && install_node;;
+        install_zsh && install_vim && install_git && install_node;;
     "personal")
         echo -e $header
-        install_zsh && install_git && install_terminal && install_others && install_node;;
+        install_zsh && install_vim && install_git && install_terminal;;
     *)
         echo $"Usage: $0 {basic|working|personal}"
         exit 1
