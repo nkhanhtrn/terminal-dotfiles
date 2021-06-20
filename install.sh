@@ -16,7 +16,7 @@ install_zsh()
     echo "Install oh-my-zsh..."
     git clone git://github.com/robbyrussell/oh-my-zsh.git $HOME/.oh-my-zsh
     echo "Install ZSH Configuration..."
-    cp zsh/.zshrc $HOME/
+    cp zsh/config $HOME/.zshrc
     echo ""
 }
 
@@ -34,7 +34,8 @@ install_vim()
 {
     echo "Install Vim"
     curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-            https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim && cp vim/config $HOME/.vimrc
+            https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    cp vim/config $HOME/.vimrc
 }
     
 install_node()
@@ -43,7 +44,7 @@ install_node()
     curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
     source "$HOME/.nvm/nvm.sh"
     nvm install stable
-    npm install -g webpack ngrok http-server
+    npm install -g ngrok http-server
     echo ""
 }
 

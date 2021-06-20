@@ -7,8 +7,8 @@ ZSH_THEME='bureau'
 
 # oh-my-zsh plugins
 PRODUCTIVITY=(colorize command-not-found)
-BUILD=(bower docker git vagrant)
-NODEJS=(node nvm bower)
+BUILD=(docker git vagrant)
+NODEJS=(node nvm)
 RUBY=(ruby gem)
 PYTHON=(pip python)
 DISTRO=(systemd)
@@ -25,9 +25,3 @@ if [ -f $HOME/.nvm/nvm.sh ]; then
     source "$HOME/.nvm/nvm.sh"
     nvm use stable
 fi
-
-# alias
-command -v python3 >/dev/null && alias pip3='python3 -m pip'
-command -v git >/dev/null && \
-alias gpull="git pull origin $(git branch | grep \* | cut -d ' ' -f2)" && \
-alias gpush="git push origin $(git branch | grep \* | cut -d ' ' -f2)"

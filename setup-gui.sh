@@ -16,8 +16,8 @@ $dialog\
     --title "Dotfiles Installer"\
     --backtitle "Dotfiles Installer"\
     --radiolist "\nChoose the desired type of installation\n" 12 40 3\
-    "basic" "zsh + emacs + conkeror" on\
-    "working" "zsh + emacs + git" off\
+    "basic" "zsh + vim" on\
+    "working" "zsh + git + vim" off\
     "personal" "all configurations" off\
     2> "$select"
 
@@ -26,4 +26,4 @@ read result < "$select"
 rm -f "$select"
 
 # convert the selection into readable install guide
-/bin/bash install.sh "$result";;
+/bin/bash install.sh "$result"
