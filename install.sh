@@ -48,6 +48,11 @@ install_node()
     echo ""
 }
 
+install_fonts()
+{
+    cp -r fonts $HOME/.fonts
+}
+
 ########################### Main Function ############################
 header="\n=================== INSTALL ========================="
 case $result in
@@ -59,7 +64,7 @@ case $result in
         install_zsh && install_vim && install_git && install_node;;
     "personal")
         echo -e $header
-        install_zsh && install_vim && install_git && install_terminal;;
+        install_zsh && install_vim && install_git && install_fonts && install_terminal;;
     *)
         echo $"Usage: $0 {basic|working|personal}"
         exit 1
