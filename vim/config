@@ -9,6 +9,7 @@ Plug 'nvie/vim-flake8'
 Plug 'jnurmine/Zenburn'
 Plug 'altercation/vim-colors-solarized'
 Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'ryanoasis/vim-devicons'
@@ -25,8 +26,8 @@ set mouse=a
 " Space & tab
 set tabstop=4
 set softtabstop=4
-set expandtab
-set autoindent
+"set expandtab
+"set autoindent=off
 set shiftwidth=4
 set scrolloff=10
 set encoding=utf-8
@@ -59,11 +60,17 @@ set foldmethod=indent
 " Movement
 nnoremap j gj
 nnoremap k gk
-noremap H b
-noremap L e
-noremap gh ^
-noremap gl $
-nnoremap gV `[v`]
+nnoremap <C-h> ^
+nnoremap <C-l> $
+nnoremap H b
+nnoremap L e
+nnoremap <C-j> }
+nnoremap <C-k> {
+
+" Search
+:set ignorecase
+:set smartcase
+nnoremap // :noh<CR>
 
 " Leader Shortcuts
 inoremap jk <esc>
@@ -71,7 +78,7 @@ nnoremap <leader>u :GundoToggle<CR>
 nnoremap <leader>s :mksession<CR>
 
 " Terminal
-nnoremap <C-`> :term<CR>
+nnoremap <silent> <C-t> :ToggleTerminal<CR>
 
 " NERDTree
 nnoremap <leader>n :NERDTreeFocus<CR>
@@ -82,9 +89,23 @@ let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
 " fzf.vim
 let g:fzf_preview_window = ['up:60%', 'ctrl-/']
 nnoremap <C-p> :Files<CR>
-nnoremap <C-s> :Ag<CR>
+nnoremap <C-f> :Ag<CR>
+nnoremap <C-t> :W<CR>
+nnoremap <C-w> :q<CR>
+nnoremap <C-s> :w<CR>
+nnoremap <C-s-w> :wq<CR>
+
 command! -bang -nargs=? -complete=dir Files
     \ call fzf#vim#files(<q-args>, {'options': ['--layout=reverse', '--info=inline', '--preview', '~/.vim/plugged/fzf.vim/bin/preview.sh {}']}, <bang>0)
+command! -bang -nargs=? -complete=dir Ag
+    \ call fzf#vim#ag(<q-args>, {'options': ['--layout=reverse', '--info=inline', '--preview', '~/.vim/plugged/fzf.vim/bin/preview.sh {}']}, <bang>0)
+
+" Airline
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = '|'
+let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 
 " Python
 let python_highlight_all = 1
+
