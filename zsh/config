@@ -25,3 +25,5 @@ if [ -f $HOME/.nvm/nvm.sh ]; then
     source "$HOME/.nvm/nvm.sh"
     nvm use stable
 fi
+
+export BAT_THEME="Dracula"
