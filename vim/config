@@ -23,6 +23,8 @@ autocmd VimEnter *
 
 syntax enable
 set mouse=a
+set clipboard=unnamedplus
+autocmd BufEnter * if expand("%:p:h") !~ '^/tmp' | silent! lcd %:p:h | endif
 
 " Space & tab
 set tabstop=4
