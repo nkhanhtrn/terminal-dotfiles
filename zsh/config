@@ -2,14 +2,12 @@
 # usr/bin/setxkbmap -option "ctrl:swapcaps"
 
 # oh-my-zsh configuration
-ZSH=$HOME/.oh-my-zsh
 ZSH_THEME='bureau'
 
 # oh-my-zsh plugins
-PRODUCTIVITY=(colorize command-not-found)
-BUILD=(docker git vagrant)
+PRODUCTIVITY=(colorize command-not-found autosuggestions syntax-highlighting k)
+BUILD=(docker git)
 NODEJS=(node nvm)
-RUBY=(ruby gem)
 PYTHON=(pip python)
 DISTRO=(systemd)
 

@@ -14,21 +14,14 @@ install_git()
 install_zsh()
 {
     echo "Install oh-my-zsh..."
-    git clone git://github.com/robbyrussell/oh-my-zsh.git $HOME/.oh-my-zsh
+    git clone https://github.com/ohmyzsh/ohmyzsh.git ~/.oh-my-zsh
     echo "Install ZSH Configuration..."
     cp zsh/config $HOME/.zshrc
+    echo "Change to ZSH Shell"
+    chsh -s $(which zsh)
     echo ""
 }
 
-install_terminal()
-{
-    echo "Install Terminal Configuration..."
-    if [ -d $HOME/.config/xfce4 ]
-    then
-        cp -r terminal $HOME/.config/xfce4/
-    fi
-    echo ""
-}
 
 install_vim()
 {
@@ -64,7 +57,7 @@ case $result in
         install_zsh && install_vim && install_git && install_node;;
     "personal")
         echo -e $header
-        install_zsh && install_vim && install_git && install_fonts && install_terminal;;
+        install_zsh && install_vim && install_git && install_fonts;;
     *)
         echo $"Usage: $0 {basic|working|personal}"
         exit 1
