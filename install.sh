@@ -31,15 +31,6 @@ install_vim()
     cp vim/config $HOME/.vimrc
 }
     
-install_node()
-{
-    echo "install Node JS and packages"
-    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
-    source "$HOME/.nvm/nvm.sh"
-    nvm install stable
-    npm install -g ngrok http-server
-    echo ""
-}
 
 install_fonts()
 {
@@ -54,7 +45,7 @@ case $result in
         install_zsh && install_vim;;
     "working")
         echo -e $header
-        install_zsh && install_vim && install_git && install_node;;
+        install_zsh && install_vim && install_git;;
     "personal")
         echo -e $header
         install_zsh && install_vim && install_git && install_fonts;;

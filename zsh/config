@@ -5,23 +5,16 @@
 ZSH_THEME='bureau'
 
 # oh-my-zsh plugins
-PRODUCTIVITY=(colorize command-not-found autosuggestions syntax-highlighting k)
+PRODUCTIVITY=(colorize)
 BUILD=(docker git)
-NODEJS=(node nvm)
 PYTHON=(pip python)
 DISTRO=(systemd)
 
-plugins=($PRODUCTIVITY $BUILD $NODEJS $PYTHON $DISTRO)
+plugins=($PRODUCTIVITY $BUILD $PYTHON $DISTRO)
 
 # oh-my-zsh
-if [ -f $ZSH/oh-my-zsh.sh ]; then
-    source "$ZSH/oh-my-zsh.sh"
-fi
-
-# nvm
-if [ -f $HOME/.nvm/nvm.sh ]; then
-    source "$HOME/.nvm/nvm.sh"
-    nvm use stable
+if [ -f $HOME/.oh-my-zsh/oh-my-zsh.sh ]; then
+    source "$HOME/.oh-my-zsh/oh-my-zsh.sh"
 fi
 
 export BAT_THEME="Dracula"
