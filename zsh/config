@@ -5,7 +5,10 @@
 ZSH_THEME='bureau'
 
 # oh-my-zsh plugins
-PRODUCTIVITY=(colorize)
+PRODUCTIVITY=(
+    colorize
+    zsh-autosuggestions
+)
 BUILD=(docker git)
 PYTHON=(pip python)
 DISTRO=(systemd)
@@ -16,5 +19,3 @@ plugins=($PRODUCTIVITY $BUILD $PYTHON $DISTRO)
 if [ -f $HOME/.oh-my-zsh/oh-my-zsh.sh ]; then
     source "$HOME/.oh-my-zsh/oh-my-zsh.sh"
 fi
-
-export BAT_THEME="Dracula"
