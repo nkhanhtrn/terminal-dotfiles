@@ -1,4 +1,5 @@
 [user]
 	name = Khanh Tran
+	email = nkhanh.trn@gmail.com
 [core]
 	excludesfile = ~/.gitignore_global

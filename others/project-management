@@ -1,0 +1,23 @@
+[
+	{
+		"name": "opengl-projects",
+		"rootPath": "/home/nkhanhtrn/code/opengl-projects",
+		"paths": [],
+		"tags": [],
+		"enabled": true
+	},
+	{
+		"name": "opengl-snake",
+		"rootPath": "/home/nkhanhtrn/code/opengl-snake",
+		"paths": [],
+		"tags": [],
+		"enabled": true
+	},
+	{
+		"name": "terminal-dotfiles",
+		"rootPath": "/home/nkhanhtrn/code/terminal-dotfiles",
+		"paths": [],
+		"tags": [],
+		"enabled": true
+	}
+]
