@@ -44,7 +44,7 @@ install_others () {
 }
 
 echo -e "=================== INSTALL ========================="
-install_vim && install_git && install_fonts && install_zsh && install_others
+install_vim && install_git && install_fonts && install_others && install_zsh
 
 # finishing message
 read -sp "Installation finished. Press ENTER to continue..."

@@ -19,5 +19,19 @@
 		"paths": [],
 		"tags": [],
 		"enabled": true
-	}
+	},
+    {
+        "name": "nes-cpp",
+        "rootPath": "/home/nkhanhtrn/code/nes-cpp",
+        "paths": [],
+        "tags": [],
+        "enabled": true
+    },
+    {
+        "name": "ebook-reader-pwa",
+        "rootPath": "/home/nkhanhtrn/code/ebook-reader-pwa",
+        "paths": [],
+        "tags": [],
+        "enabled": true
+    }
 ]
