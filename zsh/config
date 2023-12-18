@@ -8,6 +8,8 @@ ZSH_THEME='bureau'
 PRODUCTIVITY=(
     colorize
     zsh-autosuggestions
+	zsh-syntax-highlighting
+	zsh-autocomplete
 )
 BUILD=(docker git)
 PYTHON=(pip python)

@@ -18,10 +18,9 @@ install_zsh () {
     echo -e "Install ZSH configuration..."
     clone_git "$HOME/.oh-my-zsh" "https://github.com/ohmyzsh/ohmyzsh.git"
     clone_git "$HOME/.oh-my-zsh/plugins/zsh-autosuggestions" "https://github.com/zsh-users/zsh-autosuggestions"
-    cp zsh/config $HOME/.zshrc
-    if [ $SHELL != "/bin/zsh" ]; then
-        chsh -s $(which zsh)
-    fi
+    clone_git "$HOME/.oh-my-zsh/plugins/zsh-autocomplete" "https://github.com/marlonrichert/zsh-autocomplete"
+    clone_git "$HOME/.oh-my-zsh/plugins/zsh-syntax-highlighting" "https://github.com/zsh-users/zsh-syntax-highlighting"
+	cp zsh/config $HOME/.zshrc
 }
 
 
