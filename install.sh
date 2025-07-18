@@ -37,13 +37,8 @@ install_fonts () {
     cp -r fonts $HOME/.fonts
 }
 
-install_others () {
-    echo -e "Install Others..."
-    cp others/project-management ~/.config/Code/User/globalStorage/alefragnani.project-manager/projects.json
-}
-
 echo -e "=================== INSTALL ========================="
-install_vim && install_git && install_fonts && install_others && install_zsh
+install_vim && install_git && install_fonts && install_zsh
 
 # finishing message
 read -sp "Installation finished. Press ENTER to continue..."
