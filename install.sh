@@ -37,8 +37,21 @@ install_fonts () {
     cp -r fonts $HOME/.fonts
 }
 
+install_desktop () {
+	echo -e "Install Desktop shortcuts..."
+	cp desktop/* $HOME/.local/share/applications/
+}
+
+install_ubuntu () {
+	echo -e "Install Ubuntu container..."
+	toolbox create --distro ubuntu --release 24.04 "ubuntu-24.04" 
+	toolbox run -c "ubuntu-24.04" sudo apt update -y
+	toolbox run -c "ubuntu-24.04" sudo apt upgrade
+	toolbox run -c "ubuntu-24.04" sudo apt install libgl1 libfontconfig1 libnss3 libasound2t64 libharfbuzz0b libthai0 -y
+}
+
 echo -e "=================== INSTALL ========================="
-install_vim && install_git && install_fonts && install_zsh
+install_vim && install_git && install_fonts && install_zsh && install_desktop
 
 # finishing message
 read -sp "Installation finished. Press ENTER to continue..."
