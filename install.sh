@@ -7,6 +7,22 @@ install_claude () {
 	mkdir -p $HOME/.claude/
 	cp claude.json $HOME/.claude/settings.json
 	echo -e "Remember to add your API key (https://z.ai/manage-apikey/apikey-list) to $HOME/.claude/settings.json"
+
+	# Clone and setup claude-the-albino-cros
+	local CLAUDE_REPO="$HOME/claude-the-albino-cros"
+	if [ ! -d "$CLAUDE_REPO" ]; then
+		echo -e "Cloning claude-the-albino-cros..."
+		git clone https://github.com/nkhanhtrn/claude-the-albino-cros.git "$CLAUDE_REPO"
+	fi
+
+	echo -e "Running setup.sh..."
+	cd "$CLAUDE_REPO" && ./setup.sh
+
+	echo -e "Running deploy-local.sh..."
+	cd "$CLAUDE_REPO" && ./deploy-local.sh
+
+	# Return to original directory
+	cd - > /dev/null
 }
 
 install_git () {
