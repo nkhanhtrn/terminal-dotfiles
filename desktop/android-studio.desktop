@@ -1,8 +1,0 @@
-#!/usr/bin/env xdg-open
-[Desktop Entry]
-Version=1.0
-Terminal=false
-Type=Application
-Name=Android Studio
-Exec="/home/nkhanhtrn/android-studio/bin/studio.sh"
-Icon=/home/nkhanhtrn/.local/share/applications/android-studio.png
