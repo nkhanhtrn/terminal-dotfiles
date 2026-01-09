@@ -1,0 +1,8 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Version=1.0
+Terminal=false
+Type=Application
+Name=thinkorswim
+Exec="/home/nkhanhtrn/.local/share/applications/thinkorswim.sh"
+Icon=/home/nkhanhtrn/.local/share/applications/thinkorswim.png

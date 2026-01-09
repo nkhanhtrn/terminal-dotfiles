@@ -2,29 +2,6 @@
 result=$1
 
 ####################### Installation Function ##########################
-install_claude () {
-	echo -e "Install Claude AI..."
-	mkdir -p $HOME/.claude/
-	cp claude.json $HOME/.claude/settings.json
-	echo -e "Remember to add your API key (https://z.ai/manage-apikey/apikey-list) to $HOME/.claude/settings.json"
-
-	# Clone and setup claude-the-albino-cros
-	local CLAUDE_REPO="$HOME/claude-the-albino-cros"
-	if [ ! -d "$CLAUDE_REPO" ]; then
-		echo -e "Cloning claude-the-albino-cros..."
-		git clone https://github.com/nkhanhtrn/claude-the-albino-cros.git "$CLAUDE_REPO"
-	fi
-
-	echo -e "Running setup.sh..."
-	cd "$CLAUDE_REPO" && ./setup.sh
-
-	echo -e "Running deploy-local.sh..."
-	cd "$CLAUDE_REPO" && ./deploy-local.sh
-
-	# Return to original directory
-	cd - > /dev/null
-}
-
 install_git () {
     echo -e "Install Git Configuration..."
     cp git/gitignore_global $HOME/.gitignore_global
@@ -60,8 +37,21 @@ install_fonts () {
     cp -r fonts $HOME/.fonts
 }
 
+install_desktop () {
+	echo -e "Install Desktop shortcuts..."
+	cp desktop/* $HOME/.local/share/applications/
+}
+
+install_ubuntu () {
+	echo -e "Install Ubuntu container..."
+	toolbox create --distro ubuntu --release 24.04 "ubuntu-24.04" 
+	toolbox run -c "ubuntu-24.04" sudo apt update -y
+	toolbox run -c "ubuntu-24.04" sudo apt upgrade
+	toolbox run -c "ubuntu-24.04" sudo apt install libgl1 libfontconfig1 libnss3 libasound2t64 libharfbuzz0b libthai0 -y
+}
+
 echo -e "=================== INSTALL ========================="
-install_vim && install_git && install_fonts && install_zsh && install_claude
+install_vim && install_git && install_fonts && install_zsh && install_desktop
 
 # finishing message
 read -sp "Installation finished. Press ENTER to continue..."
