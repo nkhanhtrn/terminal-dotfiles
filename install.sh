@@ -42,6 +42,11 @@ install_desktop () {
 	cp desktop/* $HOME/.local/share/applications/
 }
 
+install_tmux () {
+    echo -e "Install Tmux Configuration..."
+    cp tmux/config $HOME/.tmux.conf
+}
+
 install_ubuntu () {
 	echo -e "Install Ubuntu container..."
 	toolbox create --distro ubuntu --release 24.04 "ubuntu-24.04" 
@@ -51,7 +56,7 @@ install_ubuntu () {
 }
 
 echo -e "=================== INSTALL ========================="
-install_vim && install_git && install_fonts && install_zsh && install_desktop
+install_vim && install_git && install_fonts && install_zsh && install_desktop && install_tmux
 
 # finishing message
 read -sp "Installation finished. Press ENTER to continue..."
