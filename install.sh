@@ -53,7 +53,8 @@ install_desktop () {
 
 install_tmux () {
     echo -e "Install Tmux Configuration..."
-    cp tmux/config $HOME/.tmux.conf
+    ZSH_PATH=$(which zsh)
+    sed "s|ZSH_PATH|${ZSH_PATH}|g" tmux/config > $HOME/.tmux.conf
 }
 
 install_ubuntu () {
