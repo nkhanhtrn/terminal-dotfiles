@@ -14,6 +14,15 @@ clone_git () {
     fi
 }
 
+install_nvm () {
+    if [ -d "$HOME/.nvm" ] || command -v nvm &> /dev/null; then
+        echo -e "NVM already installed, skipping..."
+        return 0
+    fi
+    echo -e "Install NVM..."
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
+}
+
 install_zsh () {
     echo -e "Install ZSH configuration..."
     clone_git "$HOME/.oh-my-zsh" "https://github.com/ohmyzsh/ohmyzsh.git"
@@ -56,7 +65,7 @@ install_ubuntu () {
 }
 
 echo -e "=================== INSTALL ========================="
-install_vim && install_git && install_fonts && install_zsh && install_desktop && install_tmux
+install_vim && install_git && install_fonts && install_nvm && install_zsh && install_desktop && install_tmux
 
 # finishing message
 read -sp "Installation finished. Press ENTER to continue..."
