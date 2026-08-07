@@ -1,5 +1,5 @@
 #!/bin/bash
-result=$1
+result=${1:-all}
 
 ####################### Installation Function ##########################
 install_git () {
@@ -65,8 +65,23 @@ install_ubuntu () {
 	toolbox run -c "ubuntu-24.04" sudo apt install libgl1 libfontconfig1 libnss3 libasound2t64 libharfbuzz0b libthai0 -y
 }
 
+HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
 echo -e "=================== INSTALL ========================="
-install_vim && install_git && install_fonts && install_nvm && install_zsh && install_desktop && install_tmux
+case "$result" in
+    all|z13)
+        install_vim && install_git && install_fonts && install_nvm && install_zsh && install_desktop && install_tmux
+        ;;
+    *)
+        echo "unknown target: '$result' (all | z13)" >&2
+        exit 2
+        ;;
+esac
+
+# 'z13' preset: also install the power-profile shortcuts + GPU clock caps
+if [ "$result" = "z13" ]; then
+    "$HERE/power-profiles/install.sh"
+fi
 
 # finishing message
 read -sp "Installation finished. Press ENTER to continue..."

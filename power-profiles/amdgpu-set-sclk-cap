@@ -1,0 +1,53 @@
+#!/usr/bin/env bash
+# amdgpu-set-sclk-cap -- cap the GPU max shader clock via the amdgpu
+# overdrive (pp_od_clk_voltage) interface.
+#
+# Usage: amdgpu-set-sclk-cap <MHz | max>
+#   <MHz>  cap the max GPU engine clock at this frequency
+#   max    remove the cap (let the GPU boost to its maximum)
+set -u
+
+DEV=""
+for d in /sys/class/drm/card*/device; do
+    [ -e "$d/pp_od_clk_voltage" ] && { DEV="$d"; break; }
+done
+[ -z "$DEV" ] && { echo "amdgpu-set-sclk-cap: no overdrive interface found" >&2; exit 1; }
+
+OD="$DEV/pp_od_clk_voltage"
+LVL="$DEV/power_dpm_force_performance_level"
+
+MINMHZ=$(awk '/^SCLK:/{gsub(/Mhz/,"");print $2;exit}' "$OD")
+MAXMHZ=$(awk '/^SCLK:/{gsub(/Mhz/,"");print $3;exit}' "$OD")
+[ -z "$MINMHZ" ] && MINMHZ=400
+[ -z "$MAXMHZ" ] && MAXMHZ=2900
+
+cap() {  # $1 = max mhz
+    local mx="$1"
+    echo manual > "$LVL" 2>/dev/null || true
+    echo "s 0 $MINMHZ" > "$OD"
+    echo "s 1 $mx"     > "$OD"
+    echo "c"           > "$OD"
+}
+
+uncap() {
+    echo "r" > "$OD"
+    echo "c" > "$OD" 2>/dev/null || true
+    echo auto > "$LVL" 2>/dev/null || true
+}
+
+case "${1:-max}" in
+    max|MAX|auto)
+        uncap ;;
+    *)
+        case "$1" in
+            ''|*[!0-9]*)
+                echo "amdgpu-set-sclk-cap: invalid MHz '$1' (expect a number or 'max')" >&2
+                exit 2 ;;
+        esac
+        if [ "$1" -lt "$MINMHZ" ] || [ "$1" -gt "$MAXMHZ" ]; then
+            echo "amdgpu-set-sclk-cap: $1 out of range [$MINMHZ..$MAXMHZ]" >&2
+            exit 2
+        fi
+        cap "$1" ;;
+esac
+echo "GPU SCLK cap: ${1:-max} (range $MINMHZ..$MAXMHZ MHz)"
