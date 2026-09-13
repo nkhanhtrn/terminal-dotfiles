@@ -1,3 +1,28 @@
-# Enable mouse support
+# -- basics -----------------------------------------------------------------
 set -g mouse on
 set-option -g default-shell ZSH_PATH
+set -sg escape-time 0
+set -g default-terminal "tmux-256color"
+set -ga terminal-overrides ",xterm-256color:Tc"
+set -g history-limit 50000
+
+# -- plugin manager (tpm) ---------------------------------------------------
+set -g @plugin 'tmux-plugins/tpm'
+set -g @plugin 'tmux-plugins/tmux-sensible'
+
+# session save / restore
+set -g @plugin 'tmux-plugins/tmux-resurrect'
+set -g @plugin 'tmux-plugins/tmux-continuum'
+
+# resurrect: capture pane scrollback + restore common programs
+# (~) means "don't restore if not running in the right context"
+set -g @resurrect-capture-pane-contents 'on'
+set -g @resurrect-strategy-nvim 'session'
+set -g @resurrect-processes 'ssh psql mysql sqlite3 ~vim ~nvim mosh tail ~btop ~htop ~lazygit'
+
+# continuum: auto-save every 15 min, auto-restore on tmux server start
+set -g @continuum-restore 'on'
+set -g @continuum-save-interval '15'
+
+# initialize tpm (keep at the very bottom)
+run '~/.tmux/plugins/tpm/tpm'

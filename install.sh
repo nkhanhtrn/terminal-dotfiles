@@ -53,8 +53,28 @@ install_desktop () {
 
 install_tmux () {
     echo -e "Install Tmux Configuration..."
-    ZSH_PATH=$(which zsh)
+    clone_git "$HOME/.tmux/plugins/tpm" "https://github.com/tmux-plugins/tpm.git"
+    # resolve zsh path robustly (command -v fails in restricted PATHs)
+    ZSH_PATH=""
+    for _c in "$(command -v zsh 2>/dev/null)" \
+              /home/linuxbrew/.linuxbrew/bin/zsh \
+              /usr/bin/zsh /bin/zsh; do
+        if [ -x "$_c" ]; then ZSH_PATH="$_c"; break; fi
+    done
+    ZSH_PATH="${ZSH_PATH:-$SHELL}"
     sed "s|ZSH_PATH|${ZSH_PATH}|g" tmux/config > $HOME/.tmux.conf
+    # install plugins: tpm's installer needs a tmux server with config sourced
+    if [ -x "$HOME/.tmux/plugins/tpm/bin/install_plugins" ]; then
+        tmux start-server 2>/dev/null || true
+        # create a throwaway session if none exists, so source-file has a server
+        if ! tmux ls &>/dev/null; then
+            tmux new-session -d -s _tpm_install
+            _OCD_CLEANUP=1
+        fi
+        tmux source-file "$HOME/.tmux.conf" 2>/dev/null || true
+        "$HOME/.tmux/plugins/tpm/bin/install_plugins"
+        [ -n "$_OCD_CLEANUP" ] && tmux kill-session -t _tpm_install 2>/dev/null || true
+    fi
 }
 
 install_ubuntu () {

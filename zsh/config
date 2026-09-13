@@ -21,7 +21,49 @@ if [ -f $HOME/.oh-my-zsh/oh-my-zsh.sh ]; then
     source "$HOME/.oh-my-zsh/oh-my-zsh.sh"
 fi
 
-export NVM_DIR="$HOME/.nvm" 
+export NVM_DIR="$HOME/.nvm"
 
 # opencode
 export PATH=$HOME/.opencode/bin:$PATH
+if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]; then
+    PATH="$HOME/.local/bin:$HOME/bin:$PATH"
+fi
+
+# linuxbrew
+if [ -x /var/home/linuxbrew/.linuxbrew/bin/brew ]; then
+    eval "$(/var/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+fi
+
+export SHELL=zsh
+### bling.sh source start
+test -f /usr/share/bazzite-cli/bling.sh && source /usr/share/bazzite-cli/bling.sh
+### bling.sh source end
+
+# --- auto-start tmux: one unique session per terminal tab -----------------
+# Each Konsole tab/window gets its own session (main, main-1, main-2, ...).
+# All sessions are auto-saved by tmux-continuum and restored on next boot.
+# Skipped when already inside tmux or inside an editor's embedded terminal.
+if [[ -z "$TMUX" ]] && [[ -o interactive ]]; then
+    if [[ -z "$VSCODE_IPC_HOOK" && -z "$INSIDE_EMACS" && -z "$TERM_PROGRAM" ]]; then
+        if command -v tmux &>/dev/null; then
+            _ocd_sess=main
+            _ocd_n=1
+            while tmux has-session -t "$_ocd_sess" 2>/dev/null; do
+                _ocd_sess="main-$_ocd_n"
+                _ocd_n=$((_ocd_n + 1))
+            done
+            exec tmux new-session -s "$_ocd_sess"
+        fi
+    fi
+fi
+
+# bun completions
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+# hipfire
+export PATH="$HOME/.hipfire/bin:$PATH"
+

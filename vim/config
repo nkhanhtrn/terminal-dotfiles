@@ -1,3 +1,13 @@
+if executable('zsh')
+    set shell=zsh
+elseif executable('/var/home/linuxbrew/.linuxbrew/bin/zsh')
+    set shell=/var/home/linuxbrew/.linuxbrew/bin/zsh
+elseif executable('/bin/bash')
+    set shell=/bin/bash
+else
+    set shell=/bin/sh
+endif
+
 call plug#begin('~/.vim/plugged')
 Plug 'preservim/NERDTree'
 Plug 'mileszs/ack.vim'
