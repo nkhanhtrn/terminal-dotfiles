@@ -8,6 +8,10 @@ else
     set shell=/bin/sh
 endif
 
+if !executable('rg') && executable('/var/home/linuxbrew/.linuxbrew/bin/rg')
+    let $PATH = '/var/home/linuxbrew/.linuxbrew/bin:' . $PATH
+endif
+
 call plug#begin('~/.vim/plugged')
 Plug 'preservim/NERDTree'
 Plug 'mileszs/ack.vim'
@@ -104,13 +108,18 @@ let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
 " fzf.vim
 let g:fzf_preview_window = ['up:60%', 'ctrl-/']
 nnoremap <C-f> :Files<CR>
-nnoremap <C-a> :Ag<CR>
+nnoremap <C-a> :Rg<CR>
 nnoremap <C-t> :W<CR>
 
 command! -bang -nargs=? -complete=dir Files
     \ call fzf#vim#files(<q-args>, {'options': ['--layout=reverse', '--info=inline', '--preview', '~/.vim/plugged/fzf.vim/bin/preview.sh {}']}, <bang>0)
+command! -bang -nargs=? -complete=dir Rg
+    \ call fzf#vim#grep('rg --column --line-number --no-heading --color=always --smart-case -- '.fzf#shellescape(<q-args>), 1, {'options': ['--layout=reverse', '--info=inline', '--preview', '~/.vim/plugged/fzf.vim/bin/preview.sh {}']}, <bang>0)
 command! -bang -nargs=? -complete=dir Ag
-    \ call fzf#vim#ag(<q-args>, {'options': ['--layout=reverse', '--info=inline', '--preview', '~/.vim/plugged/fzf.vim/bin/preview.sh {}']}, <bang>0)
+    \ call fzf#vim#grep('rg --column --line-number --no-heading --color=always --smart-case -- '.fzf#shellescape(<q-args>), 1, {'options': ['--layout=reverse', '--info=inline', '--preview', '~/.vim/plugged/fzf.vim/bin/preview.sh {}']}, <bang>0)
+
+" make ack.vim use ripgrep too (ag is not installed)
+let g:ackprg = 'rg --vimgrep --smart-case --follow'
 
 " CtrlP
 nnoremap <C-o> :CtrlPMRU<CR>
