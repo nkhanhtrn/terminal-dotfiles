@@ -6,6 +6,11 @@ set -g default-terminal "tmux-256color"
 set -ga terminal-overrides ",xterm-256color:Tc"
 set -g history-limit 50000
 
+# new windows/panes start in the current pane's working directory
+bind c new-window -c "#{pane_current_path}"
+bind '"' split-window -c "#{pane_current_path}"
+bind % split-window -h -c "#{pane_current_path}"
+
 # -- plugin manager (tpm) ---------------------------------------------------
 set -g @plugin 'tmux-plugins/tpm'
 set -g @plugin 'tmux-plugins/tmux-sensible'
