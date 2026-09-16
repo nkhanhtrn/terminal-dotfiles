@@ -104,7 +104,7 @@ nnoremap <leader>n :NERDTreeFocus<CR>
 nnoremap <C-e> :NERDTreeToggle<CR>
 nnoremap <C-f> :NERDTreeFind<CR>
 let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
-autocmd FileType nerdtree nmap <buffer> <Space> <CR>
+autocmd FileType nerdtree nmap <buffer> <Space> T
 
 " fzf.vim
 let g:fzf_preview_window = ['up:60%', 'ctrl-/']
