@@ -76,6 +76,17 @@ install_tmux () {
         "$HOME/.tmux/plugins/tpm/bin/install_plugins"
         [ -n "$_OCD_CLEANUP" ] && tmux kill-session -t _tpm_install 2>/dev/null || true
     fi
+
+    # pi-serve (~/chat): systemd service where available, plain start on Termux
+    PI_SH="$HOME/chat/scripts/pi.sh"
+    if [ -f "$PI_SH" ]; then
+        echo -e "Setup pi-serve..."
+        if command -v systemctl &>/dev/null; then
+            bash "$PI_SH" setup
+        else
+            bash "$PI_SH" run
+        fi
+    fi
 }
 
 install_termux () {
