@@ -1,0 +1,5 @@
+#!/data/data/com.termux/files/usr/bin/sh
+# Start the tmux server + 'main' session at device boot (detached).
+# tmux-continuum auto-restores the saved session; the first Termux
+# window then attaches to it (see the auto-start block in ~/.zshrc).
+tmux new-session -A -s main -d 2>/dev/null

@@ -39,6 +39,13 @@ export SHELL=zsh
 test -f /usr/share/bazzite-cli/bling.sh && source /usr/share/bazzite-cli/bling.sh
 ### bling.sh source end
 
+# --- auto-start tmux: Termux always lands in one shared session ----------
+# Reopening the app attaches to the existing 'main' session (restored by
+# tmux-continuum); one is created only if none exists.
+if [[ -n "$TERMUX_VERSION" && -z "$TMUX" && -o interactive ]]; then
+    command -v tmux &>/dev/null && exec tmux new-session -A -s main
+fi
+
 # --- auto-start tmux: one unique session per terminal tab -----------------
 # Each Konsole tab/window gets its own session (main, main-1, main-2, ...).
 # All sessions are auto-saved by tmux-continuum and restored on next boot.

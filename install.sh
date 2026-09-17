@@ -106,6 +106,10 @@ install_termux () {
     echo -e "Install Termux Configuration..."
     mkdir -p "$HOME/.termux"
     cp termux/termux.properties "$HOME/.termux/termux.properties"
+    # autostart tmux at device boot (Termux:Boot)
+    mkdir -p "$HOME/.termux/boot"
+    cp termux/boot/tmux-start "$HOME/.termux/boot/tmux-start"
+    chmod 700 "$HOME/.termux/boot/tmux-start"
     command -v termux-reload-settings &>/dev/null && termux-reload-settings
 }
 
