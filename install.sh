@@ -109,8 +109,16 @@ case "$result" in
     all|z13)
         install_vim && install_git && install_fonts && install_nvm && install_zsh && install_desktop && install_tmux && install_termux
         ;;
+    vim)     install_vim ;;
+    git)     install_git ;;
+    fonts)   install_fonts ;;
+    nvm)     install_nvm ;;
+    zsh)     install_zsh ;;
+    desktop) install_desktop ;;
+    tmux)    install_tmux ;;
+    termux)  install_termux ;;
     *)
-        echo "unknown target: '$result' (all | z13)" >&2
+        echo "unknown target: '$result' (all | z13 | vim | git | fonts | nvm | zsh | desktop | tmux | termux)" >&2
         exit 2
         ;;
 esac
