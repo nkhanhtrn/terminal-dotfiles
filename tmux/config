@@ -11,6 +11,9 @@ bind c new-window -c "#{pane_current_path}"
 bind '"' split-window -c "#{pane_current_path}"
 bind % split-window -h -c "#{pane_current_path}"
 
+# close pane without confirmation prompt (default is confirm-before kill-pane)
+bind x kill-pane
+
 # copy selection to system clipboard on mouse release
 set -s set-clipboard on
 bind -T copy-mode MouseDragEnd1Pane send -X copy-pipe-and-cancel "wl-copy"
