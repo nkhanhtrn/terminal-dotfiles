@@ -1,0 +1,14 @@
+devices
+shell
+install
+uninstall
+push
+pull
+logcat
+start-server
+kill-server
+reboot
+sideload
+backup
+forward
+reverse

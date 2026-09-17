@@ -54,6 +54,26 @@ install_desktop () {
 install_tmux () {
     echo -e "Install Tmux Configuration..."
     clone_git "$HOME/.tmux/plugins/tpm" "https://github.com/tmux-plugins/tpm.git"
+
+    # -- subcmd: live subcommand hints + fzf picker (termux) ---------------
+    echo -e "Install subcmd (subcommand hints)..."
+    mkdir -p "$HOME/.config/subcmd" "$HOME/.cache/subcmd"
+    cp -r tmux/subcmd/. "$HOME/.config/subcmd/"
+    chmod 755 "$HOME/.config/subcmd/suggest" \
+             "$HOME/.config/subcmd/subcmd-daemon" \
+             "$HOME/.config/subcmd/subcmd-popup" \
+             "$HOME/.config/subcmd/lib.sh"
+    # autostart on boot (termux only)
+    if [ -d "$HOME/.termux/boot" ]; then
+        cp tmux/subcmd/boot/subcmd-start "$HOME/.termux/boot/subcmd-start"
+        chmod 700 "$HOME/.termux/boot/subcmd-start"
+    fi
+    # restart the poller so updates take effect immediately
+    _subcmd_pid="$(cat "${TMPDIR:-/tmp}/subcmd-daemon.pid" 2>/dev/null)"
+    [ -n "$_subcmd_pid" ] && kill "$_subcmd_pid" 2>/dev/null
+    rm -f "${TMPDIR:-/tmp}/subcmd-daemon.pid"
+    "$HOME/.config/subcmd/subcmd-daemon" start 2>/dev/null || true
+
     # resolve zsh path robustly (command -v fails in restricted PATHs)
     ZSH_PATH=""
     for _c in "$(command -v zsh 2>/dev/null)" \
@@ -77,6 +97,18 @@ install_tmux () {
     fi
 }
 
+install_termux () {
+    # Termux-only: the main app provides ~/.termux
+    if [ ! -d "$HOME/.termux" ]; then
+        echo -e "Not Termux, skipping..."
+        return 0
+    fi
+    echo -e "Install Termux Configuration..."
+    mkdir -p "$HOME/.termux"
+    cp termux/termux.properties "$HOME/.termux/termux.properties"
+    command -v termux-reload-settings &>/dev/null && termux-reload-settings
+}
+
 install_ubuntu () {
 	echo -e "Install Ubuntu container..."
 	toolbox create --distro ubuntu --release 24.04 "ubuntu-24.04" 
@@ -90,7 +122,7 @@ HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 echo -e "=================== INSTALL ========================="
 case "$result" in
     all|z13)
-        install_vim && install_git && install_fonts && install_nvm && install_zsh && install_desktop && install_tmux
+        install_vim && install_git && install_fonts && install_nvm && install_zsh && install_desktop && install_tmux && install_termux
         ;;
     *)
         echo "unknown target: '$result' (all | z13)" >&2

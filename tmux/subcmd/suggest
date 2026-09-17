@@ -1,0 +1,43 @@
+#!/data/data/com.termux/files/usr/bin/sh
+# suggest <command> [prefix] — print matching subcommands, one per line.
+# Sources: curated map in ~/.config/subcmd/commands/<cmd>,
+#          then generic `<cmd> --help` parse (cached, generated async).
+
+CMD="$1"
+PREF="$2"
+DIR="$HOME/.config/subcmd/commands"
+CACHE="$HOME/.cache/subcmd"
+
+# ignore junk words / paths / flags
+case "$CMD" in
+    "" | */* | .* | -* | *'$'*) exit 0 ;;
+esac
+
+if [ -f "$DIR/$CMD" ]; then
+    if [ -n "$PREF" ]; then
+        grep -i -- "^$PREF" "$DIR/$CMD"
+    else
+        cat "$DIR/$CMD"
+    fi
+    exit 0
+fi
+
+# generic fallback: parse subcommands from --help (async, cached)
+mkdir -p "$CACHE"
+if [ ! -s "$CACHE/$CMD" ] && [ ! -f "$CACHE/$CMD.gen" ]; then
+    touch "$CACHE/$CMD.gen"
+    (
+        timeout 5 "$CMD" --help 2>&1 \
+            | grep -oE '^ {2,}[a-z][a-z0-9_-]{1,18}' \
+            | tr -d ' ' | sort -u | head -24 > "$CACHE/$CMD"
+        rm -f "$CACHE/$CMD.gen"
+    ) >/dev/null 2>&1 &
+fi
+if [ -s "$CACHE/$CMD" ]; then
+    if [ -n "$PREF" ]; then
+        grep -i -- "^$PREF" "$CACHE/$CMD"
+    else
+        cat "$CACHE/$CMD"
+    fi
+fi
+exit 0

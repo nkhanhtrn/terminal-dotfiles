@@ -1,0 +1,86 @@
+#!/data/data/com.termux/files/usr/bin/sh
+# subcmd-daemon — watches the active tmux pane's input line and keeps
+# the user option @subcmd_hint updated for the status bar.
+#
+# usage:
+#   subcmd-daemon start     spawn the poll loop (no-op if already running)
+#   subcmd-daemon once [pane]  single pass; also prints the hint (debug)
+#   subcmd-daemon           same as "start"
+
+CONF="$HOME/.config/subcmd"
+. "$CONF/lib.sh"
+export PATH="$HOME/.config/subcmd:$PATH"
+
+PIDFILE="${TMPDIR:-/tmp}/subcmd-daemon.pid"
+POLL=0.3   # seconds
+MAX_MISS=240  # exit after ~1 min with no tmux server
+
+loop() {
+    # self-dedupe: if another daemon already owns the pidfile, bow out
+    old=$(cat "$PIDFILE" 2>/dev/null)
+    if [ -n "$old" ] && [ "$old" != "$$" ] \
+            && kill -0 "$old" 2>/dev/null; then
+        exit 0
+    fi
+    echo $$ > "$PIDFILE"
+    last=":"
+    miss=0
+    i=0
+    while :; do
+        hint=""
+        pane=$(tmux list-panes -a -F \
+            '#{session_attached} #{window_active} #{pane_active} #{pane_current_command} #{pane_id}' 2>/dev/null \
+            | awk '$1==1 && $2==1 && $3==1 {print $5; exit}')
+        if [ -z "$pane" ]; then
+            pane=$(tmux list-panes -a -F \
+                '#{window_active} #{pane_active} #{pane_current_command} #{pane_id}' 2>/dev/null \
+                | awk '$1==1 && $2==1 {print $4; exit}')
+        fi
+        if [ -n "$pane" ] && at_prompt "$pane"; then
+            words=$(get_words "$pane")
+            hint=$(build_hint "${words%% *}" "${words#* }")
+        fi
+        if [ "$hint" != "$last" ]; then
+            tmux set-option -gq @subcmd_hint "$hint"
+            last="$hint"
+        fi
+        if ! tmux ls >/dev/null 2>&1; then
+            miss=$((miss + 1))
+            [ "$miss" -gt "$MAX_MISS" ] && { rm -f "$PIDFILE"; exit 0; }
+        else
+            miss=0
+        fi
+        # periodic ownership check (dedupe strays from races)
+        i=$((i + 1))
+        [ $((i % 30)) -eq 0 ] && { \
+            own=$(cat "$PIDFILE" 2>/dev/null); \
+            [ "$own" != "$$" ] && exit 0; }
+        sleep "$POLL"
+    done
+}
+
+alive() {
+    [ -f "$PIDFILE" ] && kill -0 "$(cat "$PIDFILE" 2>/dev/null)" 2>/dev/null
+}
+
+case "${1:-start}" in
+    start)
+        if alive; then exit 0; fi
+        nohup "$CONF/subcmd-daemon" daemon >/dev/null 2>&1 &
+        ;;
+    daemon)
+        loop
+        ;;
+    once)
+        pane="${2:-}"
+        if [ -z "$pane" ]; then
+            pane=$(tmux list-panes -a -F \
+                '#{session_attached} #{window_active} #{pane_active} #{pane_id}' 2>/dev/null \
+                | awk '$1==1 && $2==1 && $3==1 {print $4; exit}')
+        fi
+        words=$(get_words "$pane")
+        hint=$(build_hint "${words%% *}" "${words#* }")
+        tmux set-option -gq @subcmd_hint "$hint"
+        printf 'pane=%s words=[%s] hint=[%s]\n' "$pane" "$words" "$hint"
+        ;;
+esac
