@@ -36,6 +36,3 @@ set -g @continuum-save-interval '15'
 
 # initialize tpm (keep at the very bottom)
 run '~/.tmux/plugins/tpm/tpm'
-
-# -- subcmd (live subcommand hints; termux only) ---------------------------
-if '[ -d "$HOME/.termux" ]' 'source-file "$HOME/.config/subcmd/tmux.conf"'

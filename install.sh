@@ -55,25 +55,6 @@ install_tmux () {
     echo -e "Install Tmux Configuration..."
     clone_git "$HOME/.tmux/plugins/tpm" "https://github.com/tmux-plugins/tpm.git"
 
-    # -- subcmd: live subcommand hints + fzf picker (termux) ---------------
-    echo -e "Install subcmd (subcommand hints)..."
-    mkdir -p "$HOME/.config/subcmd" "$HOME/.cache/subcmd"
-    cp -r tmux/subcmd/. "$HOME/.config/subcmd/"
-    chmod 755 "$HOME/.config/subcmd/suggest" \
-             "$HOME/.config/subcmd/subcmd-daemon" \
-             "$HOME/.config/subcmd/subcmd-popup" \
-             "$HOME/.config/subcmd/lib.sh"
-    # autostart on boot (termux only)
-    if [ -d "$HOME/.termux/boot" ]; then
-        cp tmux/subcmd/boot/subcmd-start "$HOME/.termux/boot/subcmd-start"
-        chmod 700 "$HOME/.termux/boot/subcmd-start"
-    fi
-    # restart the poller so updates take effect immediately
-    _subcmd_pid="$(cat "${TMPDIR:-/tmp}/subcmd-daemon.pid" 2>/dev/null)"
-    [ -n "$_subcmd_pid" ] && kill "$_subcmd_pid" 2>/dev/null
-    rm -f "${TMPDIR:-/tmp}/subcmd-daemon.pid"
-    "$HOME/.config/subcmd/subcmd-daemon" start 2>/dev/null || true
-
     # resolve zsh path robustly (command -v fails in restricted PATHs)
     ZSH_PATH=""
     for _c in "$(command -v zsh 2>/dev/null)" \
