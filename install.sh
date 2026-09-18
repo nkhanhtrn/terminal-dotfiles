@@ -98,6 +98,8 @@ install_termux () {
     echo -e "Install Termux Configuration..."
     mkdir -p "$HOME/.termux"
     cp termux/termux.properties "$HOME/.termux/termux.properties"
+    # tmux extras (Termux-only bindings, sourced by ~/.tmux.conf if present)
+    cp termux/tmux-extra.conf "$HOME/.tmux.conf.termux"
     # autostart tmux at device boot (Termux:Boot)
     mkdir -p "$HOME/.termux/boot"
     cp termux/boot/tmux-start "$HOME/.termux/boot/tmux-start"

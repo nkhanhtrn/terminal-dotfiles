@@ -11,13 +11,16 @@ bind c new-window -c "#{pane_current_path}"
 bind '"' split-window -c "#{pane_current_path}"
 bind % split-window -h -c "#{pane_current_path}"
 
-# close pane without confirmation prompt (default is confirm-before kill-pane)
-bind x kill-pane
+# prefix+m: toggle mouse (off => terminal handles taps, e.g. opening links in Termux)
+bind m set -g mouse \; display 'mouse: #{?mouse,on,off}'
 
 # copy selection to system clipboard on mouse release
 set -s set-clipboard on
 bind -T copy-mode MouseDragEnd1Pane send -X copy-pipe-and-cancel "wl-copy"
 bind -T copy-mode-vi MouseDragEnd1Pane send -X copy-pipe-and-cancel "wl-copy"
+
+# Termux-specific extras (open pane URLs in external browser, etc.)
+if-shell '[ -f ~/.tmux.conf.termux ]' 'source-file ~/.tmux.conf.termux'
 
 # -- plugin manager (tpm) ---------------------------------------------------
 set -g @plugin 'tmux-plugins/tpm'
