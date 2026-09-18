@@ -1,0 +1,18 @@
+#!/data/data/com.termux/files/usr/bin/sh
+# Termux:Boot startup for pi-serve (single instance — pi.sh run kills any
+# existing one before starting). Installed by terminal-dotfiles install.sh.
+PREFIX="${PREFIX:-/data/data/com.termux/files/usr}"
+export PATH="$PREFIX/bin:$PATH"
+export TMPDIR="${TMPDIR:-$PREFIX/tmp}"
+
+# locate the pi-serve checkout (pi.sh run is platform-agnostic)
+for _d in "$HOME/pi-serve" "$HOME/chat" "$HOME/code/pi-serve"; do
+    for _p in "$_d/pi.sh" "$_d/scripts/pi.sh"; do
+        if [ -f "$_p" ]; then
+            exec bash "$_p" run
+        fi
+    done
+done
+
+echo "pi-serve: pi.sh not found (looked in ~/pi-serve, ~/chat, ~/code/pi-serve)" >&2
+exit 1
