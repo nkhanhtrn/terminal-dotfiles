@@ -1,0 +1,8 @@
+# Yazi config — pairs with the tmux sidebar (prefix+t, see tmux/config).
+# Enter opens files with $EDITOR in a new full-size tmux window
+# instead of replacing the cramped 30-column sidebar pane.
+
+[opener]
+edit = [
+    { run = 'tmux new-window -n edit -- ${EDITOR:-vim} "$@"', desc = "Edit in new window", for = "unix" },
+]

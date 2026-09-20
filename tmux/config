@@ -22,6 +22,15 @@ bind -T copy-mode-vi MouseDragEnd1Pane send -X copy-pipe-and-cancel "wl-copy"
 # Termux-specific extras (open pane URLs in external browser, etc.)
 if-shell '[ -f ~/.tmux.conf.termux ]' 'source-file ~/.tmux.conf.termux'
 
+# -- yazi file-tree sidebar --------------------------------------------------
+# prefix+t toggles a 30-column yazi sidebar on the left, rooted at the
+# focused pane's working directory. The sidebar pane id is kept in the
+# window option @yazi_pane; quitting yazi with q leaves it stale, so the
+# next toggle just clears it (press prefix+t again to reopen).
+bind t if -F '#{!=:#{@yazi_pane},}' \
+    'run "tmux kill-pane -t \"#{@yazi_pane}\" 2>/dev/null; tmux set -w @yazi_pane \"\""' \
+    'run "tmux set -w @yazi_pane \"$(tmux split-window -h -b -l 30 -c \"#{pane_current_path}\" -P -F \"#{pane_id}\" yazi)\""'
+
 # -- plugin manager (tpm) ---------------------------------------------------
 set -g @plugin 'tmux-plugins/tpm'
 set -g @plugin 'tmux-plugins/tmux-sensible'

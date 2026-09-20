@@ -51,6 +51,13 @@ install_desktop () {
 	cp desktop/* $HOME/.local/share/applications/
 }
 
+install_yazi () {
+    echo -e "Install Yazi Configuration..."
+    # yazi itself comes from brew (brew install yazi)
+    mkdir -p $HOME/.config/yazi
+    cp yazi/yazi.toml $HOME/.config/yazi/yazi.toml
+}
+
 install_tmux () {
     echo -e "Install Tmux Configuration..."
     clone_git "$HOME/.tmux/plugins/tpm" "https://github.com/tmux-plugins/tpm.git"
@@ -123,7 +130,7 @@ HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 echo -e "=================== INSTALL ========================="
 case "$result" in
     all|z13)
-        install_vim && install_git && install_fonts && install_nvm && install_zsh && install_desktop && install_tmux && install_termux
+        install_vim && install_git && install_fonts && install_nvm && install_zsh && install_desktop && install_tmux && install_yazi && install_termux
         ;;
     vim)     install_vim ;;
     git)     install_git ;;
@@ -132,9 +139,10 @@ case "$result" in
     zsh)     install_zsh ;;
     desktop) install_desktop ;;
     tmux)    install_tmux ;;
+    yazi)    install_yazi ;;
     termux)  install_termux ;;
     *)
-        echo "unknown target: '$result' (all | z13 | vim | git | fonts | nvm | zsh | desktop | tmux | termux)" >&2
+        echo "unknown target: '$result' (all | z13 | vim | git | fonts | nvm | zsh | desktop | tmux | yazi | termux)" >&2
         exit 2
         ;;
 esac
