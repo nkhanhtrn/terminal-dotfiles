@@ -1,3 +1,6 @@
+" remember the folder vim was launched from (before any lcd happens)
+let g:vim_start_dir = getcwd()
+
 if executable('zsh')
     set shell=zsh
 elseif executable('/var/home/linuxbrew/.linuxbrew/bin/zsh')
@@ -101,10 +104,21 @@ nnoremap <silent> <C-t> :ToggleTerminal<CR>
 
 " NERDTree
 nnoremap <leader>n :NERDTreeFocus<CR>
-nnoremap <C-e> :NERDTreeToggle<CR>
+" Toggle NERDTree with the tree rooted at the current file's folder
+function! NERDTreeToggleAtFileDir()
+    if exists('t:NERDTreeBufName') && bufwinnr(t:NERDTreeBufName) != -1
+        NERDTreeClose
+    elseif !empty(expand('%:p'))
+        execute 'NERDTree' fnameescape(expand('%:p:h'))
+    else
+        NERDTree
+    endif
+endfunction
+nnoremap <silent> <C-e> :call NERDTreeToggleAtFileDir()<CR>
 nnoremap <C-f> :NERDTreeFind<CR>
 let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
-autocmd FileType nerdtree nmap <buffer> <Space> T
+autocmd FileType nerdtree nmap <buffer> <Space> t
+autocmd FileType nerdtree nmap <buffer> <CR> t
 
 " fzf.vim
 let g:fzf_preview_window = ['up:60%', 'ctrl-/']
@@ -114,8 +128,35 @@ nnoremap <C-t> :W<CR>
 
 command! -bang -nargs=? -complete=dir Files
     \ call fzf#vim#files(<q-args>, {'options': ['--layout=reverse', '--info=inline', '--preview', '~/.vim/plugged/fzf.vim/bin/preview.sh {}']}, <bang>0)
+" Open Rg result(s) in new vim tab(s); lines = [key, file:line:col:text, ...]
+function! RgOpenInTab(lines)
+    if len(a:lines) < 2
+        return
+    endif
+    " resolve every path while cwd is still the dir rg ran in (BufEnter lcd
+    " in the vimrc would otherwise break relative paths of later results)
+    let l:targets = []
+    for line in a:lines[1:]
+        let m = matchlist(line, '^\(.\{-}\):\(\d\+\):\(\d\+\):')
+        if empty(m)
+            let m = matchlist(line, '^\(.\{-}\):\(\d\+\):')
+            if empty(m)
+                continue
+            endif
+            call add(l:targets, [fnamemodify(m[1], ':p'), str2nr(m[2]), 1])
+        else
+            call add(l:targets, [fnamemodify(m[1], ':p'), str2nr(m[2]), str2nr(m[3])])
+        endif
+    endfor
+    for [file, lnum, col] in l:targets
+        execute 'tabedit' fnameescape(file)
+        call cursor(lnum, col)
+        normal! zvzz
+    endfor
+endfunction
+
 command! -bang -nargs=? -complete=dir Rg
-    \ call fzf#vim#grep('rg --column --line-number --no-heading --color=always --smart-case -- '.fzf#shellescape(<q-args>), 1, {'options': ['--layout=reverse', '--info=inline', '--preview', '~/.vim/plugged/fzf.vim/bin/preview.sh {}']}, <bang>0)
+    \ call fzf#vim#grep('rg --column --line-number --no-heading --color=always --smart-case -- '.fzf#shellescape(<q-args>), 1, {'options': ['--layout=reverse', '--info=inline', '--preview', '~/.vim/plugged/fzf.vim/bin/preview.sh {}'], 'sink*': function('RgOpenInTab')}, <bang>0)
 command! -bang -nargs=? -complete=dir Ag
     \ call fzf#vim#grep('rg --column --line-number --no-heading --color=always --smart-case -- '.fzf#shellescape(<q-args>), 1, {'options': ['--layout=reverse', '--info=inline', '--preview', '~/.vim/plugged/fzf.vim/bin/preview.sh {}']}, <bang>0)
 
@@ -126,6 +167,23 @@ let g:ackprg = 'rg --vimgrep --smart-case --follow'
 nnoremap <C-o> :CtrlPMRU<CR>
 
 " Airline
+" statusline: full file path relative to the folder vim was launched from
+function! AirlineRootPath()
+    let l:name = bufname('%')
+    if empty(l:name)
+        return '[No Name]'
+    endif
+    if &buftype !=# ''
+        return l:name
+    endif
+    let l:path = fnamemodify(l:name, ':p')
+    let l:root = g:vim_start_dir . '/'
+    if l:path[:len(l:root)-1] ==# l:root
+        return l:path[len(l:root):]
+    endif
+    return fnamemodify(l:path, ':~')
+endfunction
+let g:airline_section_c = '%{AirlineRootPath()}%m'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
