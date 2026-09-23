@@ -74,3 +74,6 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 # hipfire
 export PATH="$HOME/.hipfire/bin:$PATH"
 
+# openscad (flatpak)
+command -v flatpak &>/dev/null && alias openscad='flatpak run org.openscad.OpenSCAD'
+
