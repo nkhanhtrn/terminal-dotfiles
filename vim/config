@@ -117,8 +117,39 @@ endfunction
 nnoremap <silent> <C-e> :call NERDTreeToggleAtFileDir()<CR>
 nnoremap <C-f> :NERDTreeFind<CR>
 let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
-autocmd FileType nerdtree nmap <buffer> <Space> t
-autocmd FileType nerdtree nmap <buffer> <CR> t
+" Go to the tab/window that shows {file}; if none, open it in a new tab.
+" (:tab drop can't be used from :execute — it parses as :tab-modified :drop,
+" which edits the current window instead of opening a new tab)
+function! TabGoOrOpen(file)
+    let l:target = fnamemodify(a:file, ':p')
+    for t in range(1, tabpagenr('$'))
+        for b in tabpagebuflist(t)
+            if buflisted(b) && fnamemodify(bufname(b), ':p') ==# l:target
+                execute 'tabnext' t
+                execute bufwinnr(b) . 'wincmd w'
+                return 1
+            endif
+        endfor
+    endfor
+    execute 'tabedit' fnameescape(a:file)
+    return 0
+endfunction
+
+" Open the file under the cursor in a tab, reusing the tab that already
+" shows it instead of duplicating
+function! NERDTreeTabDrop()
+    let l:node = g:NERDTreeFileNode.GetSelected()
+    if empty(l:node)
+        return
+    endif
+    if l:node.path.isDirectory
+        call nerdtree#ui_glue#invokeKeyMap('t')
+        return
+    endif
+    call TabGoOrOpen(l:node.path.str())
+endfunction
+autocmd FileType nerdtree nmap <buffer> <Space> :call NERDTreeTabDrop()<CR>
+autocmd FileType nerdtree nmap <buffer> <CR> :call NERDTreeTabDrop()<CR>
 
 " fzf.vim
 let g:fzf_preview_window = ['up:60%', 'ctrl-/']
@@ -149,7 +180,7 @@ function! RgOpenInTab(lines)
         endif
     endfor
     for [file, lnum, col] in l:targets
-        execute 'tabedit' fnameescape(file)
+        call TabGoOrOpen(file)
         call cursor(lnum, col)
         normal! zvzz
     endfor
