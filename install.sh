@@ -125,12 +125,25 @@ install_ubuntu () {
 	toolbox run -c "ubuntu-24.04" sudo apt install libgl1 libfontconfig1 libnss3 libasound2t64 libharfbuzz0b libthai0 -y
 }
 
+install_bazzite_fixes () {
+	echo -e "Apply Bazzite system fixes..."
+	# disable the press-and-hold diacritics popup on Plasma systems
+	if command -v kwriteconfig6 &>/dev/null; then
+		"$HERE/scripts/fix-keyboard-hold.sh"
+	else
+		echo -e "No Plasma keyboard config tool found, skipping keyboard fix..."
+	fi
+}
+
 HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 echo -e "=================== INSTALL ========================="
 case "$result" in
     all|z13)
         install_vim && install_git && install_fonts && install_nvm && install_zsh && install_desktop && install_tmux && install_yazi && install_termux
+        ;;
+    bazzite)
+        install_vim && install_git && install_fonts && install_nvm && install_zsh && install_desktop && install_tmux && install_yazi && install_termux && install_bazzite_fixes
         ;;
     vim)     install_vim ;;
     git)     install_git ;;
@@ -142,7 +155,7 @@ case "$result" in
     yazi)    install_yazi ;;
     termux)  install_termux ;;
     *)
-        echo "unknown target: '$result' (all | z13 | vim | git | fonts | nvm | zsh | desktop | tmux | yazi | termux)" >&2
+        echo "unknown target: '$result' (all | z13 | bazzite | vim | git | fonts | nvm | zsh | desktop | tmux | yazi | termux)" >&2
         exit 2
         ;;
 esac
