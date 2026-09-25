@@ -14,6 +14,20 @@ clone_git () {
     fi
 }
 
+PI_SERVE_REPO="https://github.com/nkhanhtrn/pi-serve"
+
+find_pi_sh () {
+    for _d in "$HOME/pi-serve" "$HOME/code/pi-serve" "$HOME/chat"; do
+        for _p in "$_d/pi.sh" "$_d/scripts/pi.sh"; do
+            if [ -f "$_p" ]; then
+                echo "$_p"
+                return 0
+            fi
+        done
+    done
+    return 1
+}
+
 install_nvm () {
     if [ -d "$HOME/.nvm" ] || command -v nvm &> /dev/null; then
         echo -e "NVM already installed, skipping..."
@@ -83,17 +97,25 @@ install_tmux () {
         "$HOME/.tmux/plugins/tpm/bin/install_plugins"
         [ -n "$_OCD_CLEANUP" ] && tmux kill-session -t _tpm_install 2>/dev/null || true
     fi
+}
 
-    # pi-serve: pi.sh setup branches internally (systemd service where
-    # available, plain background start otherwise) and installs the
-    # Termux:Boot hook itself, pinned to the deployed checkout.
-    PI_SH=""
-    for _c in "$HOME/pi-serve/pi.sh" "$HOME/chat/scripts/pi.sh" "$HOME/chat/pi.sh" "$HOME/code/pi-serve/pi.sh"; do
-        if [ -f "$_c" ]; then PI_SH="$_c"; break; fi
-    done
-    if [ -n "$PI_SH" ]; then
-        echo -e "Setup pi-serve..."
-        bash "$PI_SH" setup
+install_pi_serve () {
+    echo -e "Install pi-serve..."
+    PI_SH="$(find_pi_sh || true)"
+    if [ -z "$PI_SH" ]; then
+        echo -e "No checkout found, cloning pi-serve..."
+        clone_git "$HOME/pi-serve" "$PI_SERVE_REPO"
+        PI_SH="$HOME/pi-serve/pi.sh"
+    fi
+    if ! command -v node &>/dev/null; then
+        echo -e "pi-serve needs Node.js, skipping setup. Install it ('./install.sh nvm' + new shell, or 'pkg install nodejs' on Termux), then re-run './install.sh pi-serve'." >&2
+        return 0
+    fi
+    # pi.sh setup wires everything itself: systemd user unit (+linger) on
+    # Linux, plain background start otherwise, and the Termux:Boot hook
+    # pinned to the deployed checkout.
+    if ! bash "$PI_SH" setup; then
+        echo -e "pi-serve setup failed; re-run later with: bash $PI_SH setup" >&2
     fi
 }
 
@@ -139,10 +161,10 @@ HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 echo -e "=================== INSTALL ========================="
 case "$result" in
     all|z13)
-        install_vim && install_git && install_fonts && install_nvm && install_zsh && install_desktop && install_tmux && install_yazi && install_termux
+        install_vim && install_git && install_fonts && install_nvm && install_zsh && install_desktop && install_tmux && install_yazi && install_pi_serve && install_termux
         ;;
     bazzite)
-        install_vim && install_git && install_fonts && install_nvm && install_zsh && install_desktop && install_tmux && install_yazi && install_termux && install_bazzite_fixes
+        install_vim && install_git && install_fonts && install_nvm && install_zsh && install_desktop && install_tmux && install_yazi && install_pi_serve && install_termux && install_bazzite_fixes
         ;;
     vim)     install_vim ;;
     git)     install_git ;;
@@ -152,9 +174,10 @@ case "$result" in
     desktop) install_desktop ;;
     tmux)    install_tmux ;;
     yazi)    install_yazi ;;
+    pi-serve) install_pi_serve ;;
     termux)  install_termux ;;
     *)
-        echo "unknown target: '$result' (all | z13 | bazzite | vim | git | fonts | nvm | zsh | desktop | tmux | yazi | termux)" >&2
+        echo "unknown target: '$result' (all | z13 | bazzite | vim | git | fonts | nvm | zsh | desktop | tmux | yazi | pi-serve | termux)" >&2
         exit 2
         ;;
 esac
