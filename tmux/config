@@ -36,19 +36,5 @@ bind t if -F '#{!=:#{@yazi_pane},}' \
 set -g @plugin 'tmux-plugins/tpm'
 set -g @plugin 'tmux-plugins/tmux-sensible'
 
-# session save / restore
-set -g @plugin 'tmux-plugins/tmux-resurrect'
-set -g @plugin 'tmux-plugins/tmux-continuum'
-
-# resurrect: capture pane scrollback + restore common programs
-# (~) means "don't restore if not running in the right context"
-set -g @resurrect-capture-pane-contents 'on'
-set -g @resurrect-strategy-nvim 'session'
-set -g @resurrect-processes 'ssh psql mysql sqlite3 ~vim ~nvim mosh tail ~btop ~htop ~lazygit'
-
-# continuum: auto-save every 5 min, auto-restore on tmux server start
-set -g @continuum-restore 'on'
-set -g @continuum-save-interval '5'
-
 # initialize tpm (keep at the very bottom)
 run '~/.tmux/plugins/tpm/tpm'
