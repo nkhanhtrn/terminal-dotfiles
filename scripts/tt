@@ -1,0 +1,7 @@
+#!/bin/bash
+# tmux tab command for Konsole: attach to the restored/most-recent session,
+# or bootstrap a fresh "main" session (continuum will auto-restore others).
+if tmux has-session 2>/dev/null; then
+    exec tmux attach
+fi
+exec tmux new-session -s main

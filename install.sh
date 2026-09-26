@@ -97,6 +97,19 @@ install_tmux () {
         "$HOME/.tmux/plugins/tpm/bin/install_plugins"
         [ -n "$_OCD_CLEANUP" ] && tmux kill-session -t _tpm_install 2>/dev/null || true
     fi
+    # terminal session restore helpers: new Konsole tabs attach to tmux (tt),
+    # and konsole-restore reopens one tab per tmux session after boot
+    # (tmux-continuum restores the sessions incl. per-pane cwds)
+    cp "$HERE/scripts/tt" "$HERE/scripts/konsole-restore" "$HOME/.local/bin/"
+    chmod +x "$HOME/.local/bin/tt" "$HOME/.local/bin/konsole-restore"
+    if [ -f "$HOME/.local/share/konsole/KK.profile" ]; then
+        sed -i "s|^Command=.*|Command=$HOME/.local/bin/tt|" "$HOME/.local/share/konsole/KK.profile"
+    fi
+    # save tmux sessions (resurrect) when the graphical session ends
+    mkdir -p "$HOME/.config/systemd/user"
+    sed "s|/home/nkhanhtrn|$HOME|g" "$HERE/tmux/tmux-save.service" > "$HOME/.config/systemd/user/tmux-save.service"
+    systemctl --user daemon-reload 2>/dev/null
+    systemctl --user enable --now tmux-save.service 2>/dev/null || true
 }
 
 install_pi_serve () {

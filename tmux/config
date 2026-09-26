@@ -46,9 +46,9 @@ set -g @resurrect-capture-pane-contents 'on'
 set -g @resurrect-strategy-nvim 'session'
 set -g @resurrect-processes 'ssh psql mysql sqlite3 ~vim ~nvim mosh tail ~btop ~htop ~lazygit'
 
-# continuum: auto-save every 15 min, auto-restore on tmux server start
+# continuum: auto-save every 5 min, auto-restore on tmux server start
 set -g @continuum-restore 'on'
-set -g @continuum-save-interval '15'
+set -g @continuum-save-interval '5'
 
 # initialize tpm (keep at the very bottom)
 run '~/.tmux/plugins/tpm/tpm'
