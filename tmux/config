@@ -6,8 +6,9 @@ set -g default-terminal "tmux-256color"
 set -ga terminal-overrides ",xterm-256color:Tc"
 set -g history-limit 50000
 
-# new windows/panes start in the current pane's working directory
-bind c new-window -c "#{pane_current_path}"
+# new panes (splits) open in the current pane's working directory;
+# new windows start fresh at home
+bind c new-window -c "~"
 bind '"' split-window -c "#{pane_current_path}"
 bind % split-window -h -c "#{pane_current_path}"
 

@@ -77,3 +77,19 @@ export PATH="$HOME/.hipfire/bin:$PATH"
 # openscad (flatpak)
 command -v flatpak &>/dev/null && alias openscad='flatpak run org.openscad.OpenSCAD'
 
+# pi: continue the previous session by default (bare `pi` == `pi -c`)
+# Skipped for subcommands (pi update, ...) and when a session flag is given.
+pi() {
+    case "$1" in
+        install|remove|uninstall|update|list|config|auth) command pi "$@"; return ;;
+    esac
+    local _pi_add=1 _a
+    for _a in "$@"; do
+        case "$_a" in
+            -c|--continue|-r|--resume|--session|--session-id|--fork|--no-session|-n|--name|-h|--help)
+                _pi_add=0 ;;
+        esac
+    done
+    if (( _pi_add )); then command pi -c "$@"; else command pi "$@"; fi
+}
+
