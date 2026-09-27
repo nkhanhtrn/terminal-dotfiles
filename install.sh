@@ -85,8 +85,8 @@ install_tmux () {
     fi
 
     # pi-serve: pi.sh setup branches internally (systemd service where
-    # available, plain background start otherwise). The Termux:Boot script
-    # for persistence is installed by install_termux from termux/boot/.
+    # available, plain background start otherwise) and installs the
+    # Termux:Boot hook itself, pinned to the deployed checkout.
     PI_SH=""
     for _c in "$HOME/pi-serve/pi.sh" "$HOME/chat/scripts/pi.sh" "$HOME/chat/pi.sh" "$HOME/code/pi-serve/pi.sh"; do
         if [ -f "$_c" ]; then PI_SH="$_c"; break; fi
@@ -108,12 +108,11 @@ install_termux () {
     cp termux/termux.properties "$HOME/.termux/termux.properties"
     # tmux extras (Termux-only bindings, sourced by ~/.tmux.conf if present)
     cp termux/tmux-extra.conf "$HOME/.tmux.conf.termux"
-    # autostart tmux + pi-serve at device boot (Termux:Boot)
+    # autostart tmux at device boot (Termux:Boot); pi-serve's boot hook is
+    # owned by pi.sh setup, not by dotfiles
     mkdir -p "$HOME/.termux/boot"
     cp "$HERE/termux/boot/tmux-start" "$HOME/.termux/boot/tmux-start"
     chmod 700 "$HOME/.termux/boot/tmux-start"
-    cp "$HERE/termux/boot/pi-serve-start" "$HOME/.termux/boot/pi-serve-start"
-    chmod 700 "$HOME/.termux/boot/pi-serve-start"
     command -v termux-reload-settings &>/dev/null && termux-reload-settings
 }
 
