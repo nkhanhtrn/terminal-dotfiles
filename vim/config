@@ -136,14 +136,14 @@ function! TabGoOrOpen(file)
 endfunction
 
 " Open the file under the cursor in a tab, reusing the tab that already
-" shows it instead of duplicating
+" shows it instead of duplicating; directories expand/collapse in place
 function! NERDTreeTabDrop()
     let l:node = g:NERDTreeFileNode.GetSelected()
     if empty(l:node)
         return
     endif
     if l:node.path.isDirectory
-        call nerdtree#ui_glue#invokeKeyMap('t')
+        call nerdtree#ui_glue#invokeKeyMap('o')
         return
     endif
     call TabGoOrOpen(l:node.path.str())
