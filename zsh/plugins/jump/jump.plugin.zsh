@@ -103,6 +103,10 @@ _jump_wrap_command_names() {
         return __ret
     }
 }
+# project folders first in the candidate list (unlisted groups keep their
+# default order after it)
+zstyle ':completion:*:-command-:*' group-order jump-folders
+
 if (( $+functions[_command_names] )); then
     _jump_wrap_command_names
 else
