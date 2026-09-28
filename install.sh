@@ -43,9 +43,11 @@ install_zsh () {
     clone_git "$HOME/.oh-my-zsh/plugins/zsh-autosuggestions" "https://github.com/zsh-users/zsh-autosuggestions"
     clone_git "$HOME/.oh-my-zsh/plugins/zsh-autocomplete" "https://github.com/marlonrichert/zsh-autocomplete"
     clone_git "$HOME/.oh-my-zsh/plugins/zsh-syntax-highlighting" "https://github.com/zsh-users/zsh-syntax-highlighting"
-    # jump: `j name<Tab>` cds to a project folder under the JUMP_ROOTS
-    mkdir -p "$HOME/.oh-my-zsh/plugins/jump"
-    cp zsh/plugins/jump/jump.plugin.zsh "$HOME/.oh-my-zsh/plugins/jump/"
+    # jump: `j name<Tab>` cds to a project folder under the JUMP_ROOTS.
+    # custom/plugins/ is the sanctioned home for user plugins — never
+    # overwrite the stock plugin in plugins/ (tracked by the omz checkout)
+    mkdir -p "$HOME/.oh-my-zsh/custom/plugins/jump"
+    cp zsh/plugins/jump/jump.plugin.zsh "$HOME/.oh-my-zsh/custom/plugins/jump/"
 	cp zsh/config $HOME/.zshrc
 }
 
