@@ -84,6 +84,24 @@ set foldmethod=indent
 " indent method leaves block headers at level 0 and rejects zf entirely
 autocmd FileType c,cpp setlocal foldmethod=syntax
 
+" <leader>Space: toggle collapse/expand ALL folds in the buffer
+function! s:HasClosedFold()
+    for ln in range(1, line('$'))
+        if foldclosed(ln) != -1
+            return 1
+        endif
+    endfor
+    return 0
+endfunction
+function! s:FoldToggleAll()
+    if s:HasClosedFold()
+        normal! zR
+    else
+        normal! zM
+    endif
+endfunction
+nnoremap <silent> <leader><Space> :<C-u>call <SID>FoldToggleAll()<CR>
+
 " Movement
 nnoremap j gj
 nnoremap k gk
