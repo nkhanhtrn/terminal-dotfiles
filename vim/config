@@ -78,6 +78,9 @@ set foldlevelstart=10
 set foldnestmax=10
 nnoremap <space> za
 set foldmethod=indent
+" C family: fold brace blocks (structs, functions...) via syntax — the
+" indent method leaves block headers at level 0 and rejects zf entirely
+autocmd FileType c,cpp setlocal foldmethod=syntax
 
 " Movement
 nnoremap j gj
