@@ -94,3 +94,23 @@ pi() {
     if (( _pi_add )); then command pi -c "$@"; else command pi "$@"; fi
 }
 
+
+# bare `vim` in a folder reopens the last files opened there (per-folder
+# session saved on VimLeave by the vimrc; '/' escaped as '%')
+vim() {
+    if [[ $# -eq 0 && -n $PWD && $PWD != / ]]; then
+        # :A resolves symlinks — vim's getcwd() records the physical path,
+        # so the key must match on hosts where $HOME is symlinked
+        local sess="$HOME/.vim/sessions/${${PWD:A}//\//%}.vim"
+        if [[ -f $sess ]]; then
+            # :%argdel in a saved session aborts the restore (E499 against
+            # the unnamed buffer) — strip it into a temp copy
+            local tmp="$(mktemp --suffix=.vim)"
+            grep -v '^:%argdel$' "$sess" > "$tmp"
+            command vim -S "$tmp"
+            command rm -f "$tmp"
+            return
+        fi
+    fi
+    command vim "$@"
+}

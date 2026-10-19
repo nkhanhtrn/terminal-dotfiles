@@ -3,6 +3,26 @@ set nocompatible
 " remember the folder vim was launched from (before any lcd happens)
 let g:vim_start_dir = getcwd()
 
+" per-folder sessions: a bare `vim` started here saves what it had open on
+" exit (the zsh wrapper for bare `vim` reopens it); key = launch dir with
+" '/' escaped as '%'
+if !isdirectory($HOME . '/.vim/sessions')
+    silent! call mkdir($HOME . '/.vim/sessions', 'p')
+endif
+set sessionoptions=blank,buffers,curdir,folds,help,tabpages,winsize,slash,unix
+function! s:SaveSessionIfBare()
+    if !get(g:, 'bare_start', 0)
+        return
+    endif
+    if empty(filter(range(1, bufnr('$')), 'buflisted(v:val) && !empty(bufname(v:val))'))
+        return
+    endif
+    execute 'mksession! ' . fnameescape($HOME . '/.vim/sessions/'
+                \ . substitute(g:vim_start_dir, '/', '%', 'g') . '.vim')
+endfunction
+autocmd VimEnter * let g:bare_start = (argc() == 0)
+autocmd VimLeave * call s:SaveSessionIfBare()
+
 if executable('zsh')
     set shell=zsh
 elseif executable('/var/home/linuxbrew/.linuxbrew/bin/zsh')
