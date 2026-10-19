@@ -1,3 +1,5 @@
+set nocompatible
+
 " remember the folder vim was launched from (before any lcd happens)
 let g:vim_start_dir = getcwd()
 
@@ -118,7 +120,6 @@ function! NERDTreeToggleAtFileDir()
     endif
 endfunction
 nnoremap <silent> <C-e> :call NERDTreeToggleAtFileDir()<CR>
-nnoremap <C-f> :NERDTreeFind<CR>
 let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
 " Go to the tab/window that shows {file}; if none, open it in a new tab.
 " (:tab drop can't be used from :execute — it parses as :tab-modified :drop,
@@ -157,11 +158,12 @@ autocmd FileType nerdtree nmap <buffer> <CR> :call NERDTreeTabDrop()<CR>
 " fzf.vim
 let g:fzf_preview_window = ['up:60%', 'ctrl-/']
 nnoremap <C-f> :Files<CR>
+nnoremap gB gT
 nnoremap <C-a> :Rg<CR>
 nnoremap <C-t> :W<CR>
 
 command! -bang -nargs=? -complete=dir Files
-    \ call fzf#vim#files(<q-args>, {'options': ['--layout=reverse', '--info=inline', '--preview', '~/.vim/plugged/fzf.vim/bin/preview.sh {}']}, <bang>0)
+    \ call fzf#vim#files(<q-args>, {'options': ['--layout=reverse', '--info=inline', '--preview', '~/.vim/plugged/fzf.vim/bin/preview.sh {}'], 'sink': function('TabGoOrOpen')}, <bang>0)
 " Open Rg result(s) in new vim tab(s); lines = [key, file:line:col:text, ...]
 function! RgOpenInTab(lines)
     if len(a:lines) < 2
