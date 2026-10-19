@@ -17,7 +17,7 @@ clone_git () {
 PI_SERVE_REPO="https://github.com/nkhanhtrn/pi-serve"
 
 find_pi_sh () {
-    for _d in "$HOME/pi-serve" "$HOME/code/pi-serve" "$HOME/chat"; do
+    for _d in "$HOME/pi-serve" "$HOME/code/pi-serve"; do
         for _p in "$_d/pi.sh" "$_d/scripts/pi.sh"; do
             if [ -f "$_p" ]; then
                 echo "$_p"

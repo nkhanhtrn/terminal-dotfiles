@@ -12,7 +12,7 @@ This is the back-up of my terminal dotfiles.
 ```
 
 The installer reuses an existing checkout if it finds one (`~/pi-serve`,
-`~/code/pi-serve`, `~/chat`, each with `pi.sh` or `scripts/pi.sh`), otherwise
+`~/code/pi-serve`, each with `pi.sh` or `scripts/pi.sh`), otherwise
 clones the repo to `~/pi-serve`, then runs `pi.sh setup`, which wires startup
 per platform:
 
